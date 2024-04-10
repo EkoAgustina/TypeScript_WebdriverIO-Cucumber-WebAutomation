@@ -81,7 +81,7 @@ async function elWaitForExist (locator:any) {
   try {
     await $(keyElement(locator)).waitForExist({ timeout: 6500 })
   } catch (err:any) {
-    log('WARNING', 'masukk ga sihhh: '+err.message)
+    log('WARNING', err.message)
     sleep(2)
   }
 }
