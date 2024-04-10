@@ -24,4 +24,4 @@ services:
 networks:
   default:
     external:
-      name: jenkis_compose_automation_network
+      name: jenkins_compose_automation_network
