@@ -254,8 +254,8 @@ export const config: Options.Testrunner = {
      * @param {IPickle}            scenario scenario pickle
      * @param {object}             context  Cucumber World object
      */
-    beforeStep: function (step, scenario, context) {
-        hookBeforeStep(step);
+    beforeStep: async function (step, scenario, context) {
+        await hookBeforeStep(step);
     },
     /**
      *
@@ -268,8 +268,8 @@ export const config: Options.Testrunner = {
      * @param {number}             result.duration  duration of scenario in milliseconds
      * @param {object}             context          Cucumber World object
      */
-    afterStep: function (step, scenario, result, context) {
-        hookAfterStep(scenario,step,result);  
+    afterStep: async function (step, scenario, result, context) {
+        await hookAfterStep(scenario,step,result);  
     },
     /**
      *
@@ -281,8 +281,8 @@ export const config: Options.Testrunner = {
      * @param {number}                 result.duration  duration of scenario in milliseconds
      * @param {object}                 context          Cucumber World object
      */
-    afterScenario: function (world, result, context) {
-        hooksAfterScenario(world,result);
+    afterScenario: async function (world, result, context) {
+        await hooksAfterScenario(world,result);
     },
     /**
      *
