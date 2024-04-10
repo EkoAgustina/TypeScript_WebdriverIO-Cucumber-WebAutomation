@@ -1,0 +1,7 @@
+projectPageTitle: 'By.id => projectPageTitle'
+projectOne_titleComponent: 'By.id => projectTitle_Mobile_automation_test_with_WebdriverIO_and_using_Cucumber'
+projectOne_contentComponent: 'By.id => projectDescription_title_Mobile_automation_test_with_WebdriverIO_and_using_Cucumber'
+projectTwo_titleComponent: 'By.id => projectTitle_Web_automation_test_with_WebdriverIO_and_using_Cucumber'
+projectTwo_contentComponent: 'By.id => projectDescription_title_Web_automation_test_with_WebdriverIO_and_using_Cucumber'
+projectThree_titleComponent: 'By.id => projectTitle_API_automation_test_with_RestAssured'
+projectThree_contentComponent: 'By.id => projectDescription_title_API_automation_test_with_RestAssured'

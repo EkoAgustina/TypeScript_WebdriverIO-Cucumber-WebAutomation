@@ -1,0 +1,34 @@
+############ Home test data ############
+homePage_textLeft_title: "HI, I'AM\nEko Agustina\nQA Automation Engineer | SDET"
+#########################################
+
+############ About test data ############
+aboutPage_contentTitle: "I am Quality Assurance Specialist | Software Development Engineer In Test (SDET). Highly skilled in process improvement and raising software quality standards through innovative testing and automation."
+#########################################
+
+############ Project test data ############
+projectCardOne_title: "Mobile automation test with WebdriverIO and using Cucumber"
+projectCardOne_contentCard: "Cucumber in conjunction with WebdriverIO for mobile automation offers a powerful and collaborative approach, allowing teams to efficiently test and ensure the quality of mobile applications across different platforms."
+
+projectCardTwo_title: "Web automation test with WebdriverIO and using Cucumber"
+projectCardTwo_contentCard: "Utilizing Cucumber in combination with WebdriverIO for web automation empowers teams to create readable, collaborative, and effective automated tests, facilitating a BDD approach and ensuring the quality of web applications across different browsers."
+
+projectCardThree_title: "API automation test with RestAssured"
+projectCardThree_contentCard: "RestAssured provides intuitive syntax, good integration with testing frameworks such as TestNG and JUnit, and strong support for API response verification and validation, allowing developers to write and run API test scripts efficiently and consistently."
+#########################################
+
+############ Navbar test data ############
+navbar: "Home"
+#########################################
+
+############ Footer test data ############
+footer_CopyRight_title: "© 2024 Eko Agustina. All Rights Reserved."
+myGithubUrl: "https://github.com/EkoAgustina"
+myLinkedinUrl: ""
+#########################################
+
+
+validWebTitle: "Eko Agustina"
+homePageUrl: "https://ekoagustina.my.id/"
+aboutPageUrl: "https://ekoagustina.my.id/about"
+projectPageUrl: "https://ekoagustina.my.id/project"
