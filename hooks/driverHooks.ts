@@ -1,4 +1,4 @@
-import { pageLoad, sleep, stdoutAnsiColor, takeScreenshot } from "../helpers/baseScreen.ts";
+import { pageLoad, sleep, stdoutAnsiColor, takeScreenshot, log } from "../helpers/baseScreen.ts";
 import globalVariables from "../resources/globalVariable.ts";
 import cucumberJson from 'wdio-cucumberjs-json-reporter';
 // import * as propertiesReader from 'properties-reader';
@@ -32,12 +32,8 @@ async function hookBeforeStep(step: { text: string }): Promise<string | void> {
 async function hookAfterStep (scenario:{name:string}, step:{text:string}, result:any): Promise<void> {
     globalVariables.urlAfterStep = await browser.getUrl();
     if (result.passed) {
-      console.log(
-        stdoutAnsiColor('yellow', scenario.name) +
-          '\n' +
-          ' '.repeat(scenario.name.length / 10.5) +
-          stdoutAnsiColor('yellow', `✓ ${step.text}`)
-      );
+      log("INFO", `\x1b[33m ${scenario.name} \x1b[0m`)
+      log("INFO", `\x1b[33m ✓ ${step.text} is passed \x1b[0m`)
       sleep(1);
       if (step.text.includes('User open') !== true) {
         if (globalVariables.urlBeforeStep !== globalVariables.urlAfterStep) {
