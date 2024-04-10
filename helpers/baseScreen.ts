@@ -2,7 +2,7 @@
 import cucumberJson from 'wdio-cucumberjs-json-reporter';
 import logger from '@wdio/logger';
 import * as fs from 'node:fs/promises';
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync, readdirSync, mkdirSync } from 'node:fs';
 import { keyElement } from "../mappings/mapper.ts";
 import globalVariables from "../resources/globalVariable.ts"
 import { env } from 'process';
@@ -124,7 +124,11 @@ async function pageLoad (duration:number) {
  * @returns {Promise<void>} A promise that resolves when the screenshot is captured.
  */
 async function takeScreenshot (name:string) {
-    await browser.saveScreenshot('./screenshot/' + name + '.png');
+  const checkDirectories = './screenshot'
+  if (existsSync(checkDirectories) === false) {
+    mkdirSync(checkDirectories)
+  }
+  await browser.saveScreenshot('./screenshot/' + name + '.png');
     // cucumberJson.attach(await browser.takeScreenshot(), 'image/png');
 }
 
