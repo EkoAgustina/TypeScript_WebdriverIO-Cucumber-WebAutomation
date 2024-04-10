@@ -1,4 +1,4 @@
-import { pageLoad, sleep, stdoutAnsiColor } from "../helpers/baseScreen.ts";
+import { pageLoad, sleep, stdoutAnsiColor, takeScreenshot } from "../helpers/baseScreen.ts";
 import globalVariables from "../resources/globalVariable.ts";
 import cucumberJson from 'wdio-cucumberjs-json-reporter';
 // import * as propertiesReader from 'properties-reader';
@@ -71,8 +71,8 @@ async function hooksAfterScenario(world: any, result: any): Promise<void> {
     properties.save(propertiesPath);
 
     if (result.error) {
-        await browser.saveScreenshot('./screenshot/' + world.gherkinDocument.feature.name + 'Fail' + '.png');
-        cucumberJson.attach(await browser.takeScreenshot(), 'image/png');
+      await takeScreenshot(`failed_${world.result.exception.message}`)
+        // cucumberJson.attach(await browser.takeScreenshot(), 'image/png');
     }
 }
 
