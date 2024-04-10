@@ -5,6 +5,7 @@ import * as fs from 'node:fs/promises';
 import { existsSync, readdirSync } from 'node:fs';
 import { keyElement } from "../mappings/mapper.ts";
 import globalVariables from "../resources/globalVariable.ts"
+import { env } from 'process';
 
 
 
@@ -48,12 +49,26 @@ function sleep (duration:number) {
  * @returns {Promise<void>} A promise that resolves when the browser is opened and the URL is loaded.
  */
 async function baseOpenBrowser(url:string): Promise<void> {
+    const browserName = env.browserName;
     await browser.url(url);
-    if (globalVariables.os !== 'linux') {
-      await browser.maximizeWindow();
+    if (globalVariables.os === 'linux') {
+      await browser.setWindowSize(1470,860);
     }
-      // sleep(15);
-      await browser.pause(3000)
+    else {
+      switch (browserName) {
+        case 'headless':
+          await browser.setWindowSize(1470,860);
+        break;
+        case 'chrome':
+          await browser.maximizeWindow();
+        break;
+        default:
+          throw new Error (`Unknown condition!`)
+      }
+    }
+
+    log('INFO', await browser.getWindowSize())
+    await browser.pause(3000)
 }
 
 /**
