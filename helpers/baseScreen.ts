@@ -171,4 +171,4 @@ function cleanDirectory (directoryPath:string) {
     }
 }
 
-export {baseOpenBrowser, FindElement, takeScreenshot, sleep, pageLoad, stdoutAnsiColor, getCurrentDate, cleanDirectory}
+export {baseOpenBrowser, FindElement, takeScreenshot, sleep, pageLoad, stdoutAnsiColor, getCurrentDate, cleanDirectory, log}
