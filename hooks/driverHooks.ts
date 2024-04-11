@@ -32,8 +32,14 @@ async function hookBeforeStep(step: { text: string }): Promise<string | void> {
 async function hookAfterStep (scenario:{name:string}, step:{text:string}, result:any): Promise<void> {
     globalVariables.urlAfterStep = await browser.getUrl();
     if (result.passed) {
+      if (globalVariables.os === 'linux') {
+        log("INFO", `${scenario.name}`)
+        log("INFO", `✓ ${step.text} is passed`)
+      }
+      else {
       log("INFO", `\x1b[33m ${scenario.name} \x1b[0m`)
       log("INFO", `\x1b[33m ✓ ${step.text} is passed \x1b[0m`)
+      }
       sleep(1);
       if (step.text.includes('User open') !== true) {
         if (globalVariables.urlBeforeStep !== globalVariables.urlAfterStep) {
