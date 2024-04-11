@@ -28,6 +28,18 @@ export default class globalVariables {
      * @type {any}
      */
     static urlAfterStep: any;
+
+    /**
+     * Feature name before the step execution.
+     * @type {any}
+     */
+    static featureNameBefore: any;
+
+    /**
+     * Feature name after the step execution.
+     * @type {any}
+     */
+    static featureNameAfter: any;
   
     /**
      * Path to the Allure environment properties file.

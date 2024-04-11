@@ -1,6 +1,6 @@
 import type { Options } from '@wdio/types'
 import { env } from 'process';
-import { hookBeforeStep, hookAfterStep, hooksAfterScenario } from "../hooks/driverHooks.ts"
+import { hookBeforeStep, hookAfterStep, hooksAfterScenario, hookBeforeScenario } from "../hooks/driverHooks.ts"
 import { specConfig, allureConfig } from "./report.conf.ts"
 export const config: Options.Testrunner = {
     //
@@ -245,8 +245,9 @@ export const config: Options.Testrunner = {
      * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
      * @param {object}                 context  Cucumber World object
      */
-    // beforeScenario: function (world, context) {
-    // },
+    beforeScenario: async function (world, context) {
+        await hookBeforeScenario(world)
+    },
     /**
      *
      * Runs before a Cucumber Step.

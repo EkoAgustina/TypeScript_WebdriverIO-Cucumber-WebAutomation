@@ -3,10 +3,17 @@ import globalVariables from "../resources/globalVariable.ts";
 import cucumberJson from 'wdio-cucumberjs-json-reporter';
 // import * as propertiesReader from 'properties-reader';
 import PropertiesReader from 'properties-reader';
-
-
 import { env } from 'process'; 
 import { browser} from '@wdio/globals'
+
+/**
+ * Executes before a Cucumber scenario.
+ * @param {any} world - The Cucumber World object containing information about the scenario.
+ * @returns {Promise<void>} - A Promise that resolves after updating properties and saving screenshots.
+ */
+async function hookBeforeScenario(world:any) {
+  globalVariables.featureNameBefore = world.gherkinDocument.feature.name
+}
 
 /**
  * Executes before a step in a Cucumber scenario starts.
@@ -67,6 +74,14 @@ async function hooksAfterScenario(world: any, result: any): Promise<void> {
         return 'selenium/standalone-chrome'
       }
     }
+    globalVariables.featureNameAfter = world.gherkinDocument.feature.name
+
+    if (globalVariables.featureNameBefore !== globalVariables.featureNameAfter) {
+      console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+      console.log("sipppppp")
+      await browser.reloadSession()
+      console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+    }
 
     // properties.set('Services', globalVariables.services);
     properties.set('Host', allureHostUrl() || 'Unknown');
@@ -78,4 +93,4 @@ async function hooksAfterScenario(world: any, result: any): Promise<void> {
     }
 }
 
-export { hookAfterStep, hooksAfterScenario, hookBeforeStep };
+export { hookAfterStep, hooksAfterScenario, hookBeforeStep, hookBeforeScenario };
