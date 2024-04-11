@@ -10,7 +10,7 @@ if (globalVariables.os === 'linux') {
           maxInstances: 5,
           browserName: 'chrome',
           'goog:chromeOptions': {
-            args: ['--headless', '--no-sandbox', '--disable-gpu']
+            args: ['--headless', '--no-sandbox', '--disable-gpu', 'disable-dev-shm-usage']
           },
           acceptInsecureCerts: true
         }
