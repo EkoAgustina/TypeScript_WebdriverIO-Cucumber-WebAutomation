@@ -76,12 +76,9 @@ async function hooksAfterScenario(world: any, result: any): Promise<void> {
     }
     globalVariables.featureNameAfter = world.gherkinDocument.feature.name
 
-    if (globalVariables.featureNameBefore !== globalVariables.featureNameAfter) {
-      console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-      console.log("sipppppp")
-      await browser.reloadSession()
-      console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-    }
+    // if (globalVariables.featureNameBefore !== globalVariables.featureNameAfter) {
+    //   await browser.reloadSession()
+    // }
 
     // properties.set('Services', globalVariables.services);
     properties.set('Host', allureHostUrl() || 'Unknown');
