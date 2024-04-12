@@ -1,6 +1,6 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
 import { expect, $ } from '@wdio/globals'
-import { baseOpenBrowser, takeScreenshot, pageLoad } from '../../helpers/baseScreen.ts';
+import { baseOpenBrowser, takeScreenshot, pageLoad,sleep } from '../../helpers/baseScreen.ts';
 import { actionClick } from '../../helpers/baseClick.ts'
 import { elementDisplayed, equalData, titleEqual, urlEqual } from '../../helpers/baseExpect.ts';
 import { swipeUpElDisplayed, swipeUpwithTime } from "../../helpers/baseSwipe.ts"
@@ -29,7 +29,12 @@ Given(/^User open "(.*)"$/, async (page) => {
  * @returns {Promise<void>} - A Promise that resolves after the click action is performed.
  */
 When(/^User click "(.*)"$/, async (locator) => {
-    await actionClick(locator);
+    try {
+        await actionClick(locator);
+        sleep(3);
+    } catch (err:any) {
+        throw err.message;
+    }
 });
 
 /**
