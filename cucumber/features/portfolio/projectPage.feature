@@ -5,9 +5,9 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     Given User open "https://ekoagustina.my.id"
     Then Title currently opened website is equal with "testData:validWebTitle"
     Then Currently opened website URL is equal with "testData:homePageUrl"
-    Then User take screenshot with file name "1.projectPage_homePage"
+    And User take screenshot with file name "1.projectPage_homePage"
     Then Element "navbar:navbarProject_title" is displayed
-    Then User click "navbar:navbarProject_title"
+    When User click "navbar:navbarProject_title"
     Then Currently opened website URL is equal with "testData:projectPageUrl"
     Then Element "projectPage:projectPageTitle" is displayed
     Then Element "projectPage:projectOne_titleComponent" is equal with data "testData:projectCardOne_title"
@@ -16,7 +16,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     Then Element "projectPage:projectTwo_contentComponent" is equal with data "testData:projectCardTwo_contentCard"
     Then Element "projectPage:projectThree_titleComponent" is equal with data "testData:projectCardThree_title"
     Then Element "projectPage:projectThree_contentComponent" is equal with data "testData:projectCardThree_contentCard"
-    Then User take screenshot with file name "2.projectPage"
+    And User take screenshot with file name "2.projectPage"
 
 @smokeTest @projectPage @projectPage_viaPathUrl
 Scenario: Verify the user successfully redirected to Project page when adding URL path `project` to base URL
@@ -30,7 +30,7 @@ Scenario: Verify the user successfully redirected to Project page when adding UR
     Then Element "projectPage:projectTwo_contentComponent" is equal with data "testData:projectCardTwo_contentCard"
     Then Element "projectPage:projectThree_titleComponent" is equal with data "testData:projectCardThree_title"
     Then Element "projectPage:projectThree_contentComponent" is equal with data "testData:projectCardThree_contentCard"
-    Then User take screenshot with file name "projectPage"
+    And User take screenshot with file name "projectPage"
 
 @smokeTest @projectPage @projecttPage_navbarComponent
 Scenario: Verify users can see Navbar component on Project page
@@ -38,8 +38,8 @@ Scenario: Verify users can see Navbar component on Project page
     Then Title currently opened website is equal with "testData:validWebTitle"
     Then Currently opened website URL is equal with "testData:homePageUrl"
     Then Element "navbar:navbarProject_title" is displayed
-    Then User take screenshot with file name "1.projectPage_homePage"
-    Then User click "navbar:navbarProject_title"
+    And User take screenshot with file name "1.projectPage_homePage"
+    When User click "navbar:navbarProject_title"
     Then Currently opened website URL is equal with "testData:projectPageUrl"
     Then Element "projectPage:projectPageTitle" is displayed
     Then Element "projectPage:projectOne_titleComponent" is equal with data "testData:projectCardOne_title"
@@ -51,7 +51,7 @@ Scenario: Verify users can see Navbar component on Project page
     Then Element "navbar:navbarHome_title" is displayed
     Then Element "navbar:navbarAbout_title" is displayed
     Then Element "navbar:navbarProject_title" is displayed
-    Then User take screenshot with file name "2.projectPage" 
+    And User take screenshot with file name "2.projectPage" 
 
 @smokeTest @projectPage @projectPage_footerComponent
 Scenario: Verify users can see Footer component on Project page
@@ -65,8 +65,8 @@ Scenario: Verify users can see Footer component on Project page
     Then Element "projectPage:projectTwo_contentComponent" is equal with data "testData:projectCardTwo_contentCard"
     Then Element "projectPage:projectThree_titleComponent" is equal with data "testData:projectCardThree_title"
     Then Element "projectPage:projectThree_contentComponent" is equal with data "testData:projectCardThree_contentCard"
-    And User swipe up until 2 seconds
+    When User swipe up until 2 seconds
     Then Element "footer:footerCopyRight_title" is equal with data "testData:footer_CopyRight_title"
     Then Element "footer:footerLinkedin_icon" is displayed
     Then Element "footer:footerGithub_icon" is displayed
-    Then User take screenshot with file name "2.projectPage"
+    And User take screenshot with file name "projectPage"
