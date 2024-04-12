@@ -1,6 +1,6 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
 import { expect, $ } from '@wdio/globals'
-import { baseOpenBrowser, takeScreenshot } from '../../helpers/baseScreen.ts';
+import { baseOpenBrowser, takeScreenshot, pageLoad } from '../../helpers/baseScreen.ts';
 import { actionClick } from '../../helpers/baseClick.ts'
 import { elementDisplayed, equalData, titleEqual, urlEqual } from '../../helpers/baseExpect.ts';
 import { swipeUpElDisplayed, swipeUpwithTime } from "../../helpers/baseSwipe.ts"
@@ -14,6 +14,7 @@ import { swipeUpElDisplayed, swipeUpwithTime } from "../../helpers/baseSwipe.ts"
 Given(/^User open "(.*)"$/, async (page) => {
     try {
         await baseOpenBrowser(page);
+        await pageLoad(5);
     }
     catch (err:any) {
         throw err.message;
