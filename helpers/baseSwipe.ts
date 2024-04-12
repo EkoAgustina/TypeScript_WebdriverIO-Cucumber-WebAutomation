@@ -29,7 +29,7 @@ async function swipeUpElDisplayed (locator:any) {
 async function swipeUpwithTime (time:any) {
     const windowSize = await browser.getWindowSize();
     const coordinateX = windowSize.width * 0.1
-    const coordinateY = windowSize.height * 0.5
+    const coordinateY = windowSize.height * 0.25
 
     for (let i = 0; i < time; i++) {
         await browser.scroll(coordinateX, coordinateY);
