@@ -85,8 +85,10 @@ async function hooksAfterScenario(world: any, result: any): Promise<void> {
     properties.set('Host', allureHostUrl() || 'Unknown');
     properties.save(propertiesPath);
 
+    console.log(world)
+
     if (result.error) {
-      await takeScreenshot(`failed_${world.result.exception.message}`)
+      await takeScreenshot(`failed_${world.pickle.name}`)
         // cucumberJson.attach(await browser.takeScreenshot(), 'image/png');
     }
 }
