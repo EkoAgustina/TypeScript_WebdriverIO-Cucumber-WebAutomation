@@ -57,10 +57,10 @@ async function baseOpenBrowser(url:string): Promise<void> {
     else {
       switch (browserName) {
         case 'headless':
-          await browser.setWindowSize(1470,860);
+          await browser.setWindowSize(1470,920);
         break;
         case 'chrome':
-          await browser.maximizeWindow();
+          await browser.fullscreenWindow();
         break;
         default:
           throw new Error (`Unknown condition!`)

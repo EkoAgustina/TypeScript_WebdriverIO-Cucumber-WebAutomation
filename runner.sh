@@ -1,4 +1,4 @@
-browserName='chrome'
+browserName='headless'
 cucumberTags='@homePage_Navbar'
 hostName='localhost:8080'
 
