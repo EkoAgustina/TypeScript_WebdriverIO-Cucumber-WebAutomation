@@ -15,6 +15,18 @@ projectCardTwo_contentCard: "Utilizing Cucumber in combination with WebdriverIO 
 
 projectCardThree_title: "API automation test with RestAssured"
 projectCardThree_contentCard: "RestAssured provides intuitive syntax, good integration with testing frameworks such as TestNG and JUnit, and strong support for API response verification and validation, allowing developers to write and run API test scripts efficiently and consistently."
+
+projectCardFour_title: "API automation test with Mocha Chai"
+projectCardFour_contentCard: "By combining Mocha, Chai, SuperTest, and Node.js, API automation testing benefits from a well-organized test structure, readable assertions, and convenient HTTP request handling, contributing to the effectiveness and maintainability of API test suites."
+
+projectCardFive_title: "Mobile automation test with Appium, JUnit and Cucumber"
+projectCardFive_contentCard: "One of the advantages of mobile automation with Appium using JUnit is structured testing, facilitating smooth integration into CI/CD workflows, ensuring efficient and reliable mobile app development"
+
+projectCardSix_title: "Web automation test with Selenium, JUnit and Cucumber"
+projectCardSix_contentCard: "Using Selenium for web automation with JUnit offers the advantage of organized testing structures, seamless integration with testing tools and reporting, and efficient regression testing to ensure application stability."
+
+projectCardSeven_title: "Web automation test with Selenium, TestNG and Cucumber"
+projectCardSeven_contentCard: "Web automation with Selenium using TestNG offers the advantage of built-in features like parameterization, parallel execution, and flexible test configurations, enabling comprehensive and efficient testing of web applications."
 #########################################
 
 ############ Navbar test data ############
