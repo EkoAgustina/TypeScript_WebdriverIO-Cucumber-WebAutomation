@@ -1,5 +1,5 @@
 
-import cucumberJson from 'wdio-cucumberjs-json-reporter';
+// import cucumberJson from 'wdio-cucumberjs-json-reporter';
 import logger from '@wdio/logger';
 import * as fs from 'node:fs/promises';
 import { existsSync, readdirSync, mkdirSync } from 'node:fs';
@@ -12,10 +12,10 @@ import { env } from 'process';
 /**
  * Logs a message with the specified log level.
  * @param {string} level - The log level. Should be one of 'WARNING', 'INFO', or 'ERROR'.
- * @param {any} message - The message to be logged.
+ * @param {string} message - The message to be logged.
  * @throws {Error} Throws an error if the specified log level is not recognized.
  */
-const log = (level:any, message:any) => {
+const log = (level:string, message:string) => {
   switch (level) {
     case 'WARNING':
       logger('WARNING').warn(message)
@@ -66,22 +66,22 @@ async function baseOpenBrowser(url:string): Promise<void> {
           throw new Error (`Unknown condition!`)
       }
     }
-
-    log('INFO', await browser.getWindowSize())
+    const windowSizeString = `Width: ${(await browser.getWindowSize()).width}, Height: ${(await browser.getWindowSize()).height}`;
+    log('INFO', windowSizeString)
     await browser.pause(3000)
 }
 
 /**
  * Waits for the element specified by the locator to exist on the page.
  * If the element exists within the timeout period, it resolves; otherwise, it logs a warning and continues.
- * @param {any} locator - The locator of the element to wait for.
+ * @param {string} locator - The locator of the element to wait for.
  * @returns {Promise<void>} - A Promise that resolves after the element exists or after the timeout.
  */
-async function elWaitForExist (locator:any) {
+async function elWaitForExist (locator:string) {
   try {
     await $(keyElement(locator)).waitForExist({ timeout: 6500 })
-  } catch (err:any) {
-    log('WARNING', err.message)
+  } catch (err) {
+    log('WARNING', (err as Error).message)
     sleep(2)
   }
 }
@@ -91,19 +91,19 @@ async function elWaitForExist (locator:any) {
  * @param {string} locator - The locator string to identify the element.
  * @returns {WebdriverIO.Element} The found element.
  */
-const FindElement = async (locator:string): Promise<WebdriverIO.Element> => {
-    return new Promise(async (resolve, reject) => {
-      await Promise.all([
-        elWaitForExist(locator),
-        $(keyElement(locator))
-      ])
-        .then((element) => {
-          resolve(element[1])
-        })
-        .catch((err) => {
-          reject(err)
-        })
-    })
+const findElement = async (locator: string): Promise<WebdriverIO.Element> => {
+  return new Promise((resolve, reject) => {
+    Promise.all([
+      elWaitForExist(locator),
+      $(keyElement(locator))
+    ])
+      .then((element) => {
+        resolve(element[1])
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
 }
 
 /**
@@ -175,4 +175,4 @@ function cleanDirectory (directoryPath:string) {
     }
 }
 
-export {baseOpenBrowser, FindElement, takeScreenshot, sleep, pageLoad, stdoutAnsiColor, getCurrentDate, cleanDirectory, log}
+export {baseOpenBrowser, findElement, takeScreenshot, sleep, pageLoad, stdoutAnsiColor, getCurrentDate, cleanDirectory, log}

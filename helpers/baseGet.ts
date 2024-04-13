@@ -1,4 +1,4 @@
-import { FindElement } from "./baseScreen.ts";
+import { findElement } from "./baseScreen.ts";
 
 
 /**
@@ -8,7 +8,7 @@ import { FindElement } from "./baseScreen.ts";
  * @throws {Error} If the text content is empty or null.
  */
 async function actionGetText (locator:string): Promise<string> {
-    const textValue = await (await FindElement(locator)).getText()
+    const textValue = await (await findElement(locator)).getText()
   
     if (textValue === '' || textValue === null) {
       throw new Error('Text Not Found');

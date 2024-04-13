@@ -1,9 +1,8 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
-import { expect, $ } from '@wdio/globals'
 import { baseOpenBrowser, takeScreenshot, pageLoad,sleep } from '../../helpers/baseScreen.ts';
 import { actionClick } from '../../helpers/baseClick.ts'
 import { elementDisplayed, equalData, titleEqual, urlEqual } from '../../helpers/baseExpect.ts';
-import { swipeUpElDisplayed, swipeUpwithTime } from "../../helpers/baseSwipe.ts"
+import { swipeUpwithTime } from "../../helpers/baseSwipe.ts"
 
 /**
  * Step definition for the Cucumber step: Given User open "<page>".
@@ -11,14 +10,9 @@ import { swipeUpElDisplayed, swipeUpwithTime } from "../../helpers/baseSwipe.ts"
  * @param {string} page - The page to be opened.
  * @returns {Promise<void>} - A Promise that resolves after the page is opened.
  */
-Given(/^User open "(.*)"$/, async (page) => {
-    try {
-        await baseOpenBrowser(page);
-        await pageLoad(5);
-    }
-    catch (err:any) {
-        throw err.message;
-    }
+Given(/^User open "(.*)"$/, async (page: string) => {
+    await baseOpenBrowser(page);
+    await pageLoad(5);
     
 });
 
@@ -29,12 +23,8 @@ Given(/^User open "(.*)"$/, async (page) => {
  * @returns {Promise<void>} - A Promise that resolves after the click action is performed.
  */
 When(/^User click "(.*)"$/, async (locator) => {
-    try {
-        await actionClick(locator);
-        sleep(3);
-    } catch (err:any) {
-        throw err.message;
-    }
+    await actionClick(locator);
+    sleep(3);
 });
 
 /**
@@ -56,7 +46,7 @@ Then(/^Element "(.*)" (is displayed|not displayed)$/, async (locator, condition)
  * @param {string} testData - The test data to compare with the element's text.
  * @returns {Promise<void>} - A Promise that resolves after the comparison is done.
  */
-Then(/^Element \"(.*)\" is (equal|not equal) with data \"(.*)\"$/, async (locator, condition, testData) => {
+Then(/^Element "(.*)" is (equal|not equal) with data "(.*)"$/, async (locator, condition, testData) => {
     await equalData(condition, locator, testData);
   }
 );
@@ -77,11 +67,10 @@ When(/^User swipe up until he finds element "(.*)"$/, async (locator) => {
 /**
  * Step definition for the Cucumber step: Then User swipe up until <duration> seconds".
  * Simulates a swipe up action on the screen for the specified duration.
- * @param {string} duration - The duration of the swipe action, specified in seconds.
- * @returns {Promise<void>} - A Promise that resolves after the swipe action is completed.
+ * @param {number} duration - The duration of the swipe action, specified in seconds.
  */
-When(/^User swipe up until (.*) seconds$/, async (duration) => {
-    // await swipeUpElDisplayed(locator)
+When(/^User swipe up until (.*) seconds$/, async (duration:number) => {
+    console.log(duration)
     await swipeUpwithTime(duration)
 });
 
@@ -90,7 +79,7 @@ When(/^User swipe up until (.*) seconds$/, async (duration) => {
  * @param {string} condition - The condition to be checked. It can be either 'equal' or 'not equal'.
  * @param {string} testData - The expected title to be compared with the title of the currently opened website.
  */
-Then(/^Title currently opened website is (equal|not equal) with \"(.*)\"$/, async (condition, testData) => {
+Then(/^Title currently opened website is (equal|not equal) with "(.*)"$/, async (condition, testData) => {
     await titleEqual(condition, testData);
   }
 );
@@ -100,7 +89,7 @@ Then(/^Title currently opened website is (equal|not equal) with \"(.*)\"$/, asyn
  * @param {string} condition - The condition to be checked. It can be either 'equal' or 'not equal'.
  * @param {string} testData - The expected URL to be compared with the URL of the currently opened website.
  */
-Then(/^Currently opened website URL is (equal|not equal) with \"(.*)\"$/, async (condition, testData) => {
+Then(/^Currently opened website URL is (equal|not equal) with "(.*)"$/, async (condition, testData) => {
     await urlEqual(condition, testData);
   }
 );

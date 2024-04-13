@@ -1,18 +1,17 @@
-import { pageLoad, sleep, stdoutAnsiColor, takeScreenshot, log } from "../helpers/baseScreen.ts";
+import { pageLoad, sleep, takeScreenshot, log } from "../helpers/baseScreen.ts";
 import globalVariables from "../resources/globalVariable.ts";
-import cucumberJson from 'wdio-cucumberjs-json-reporter';
 // import * as propertiesReader from 'properties-reader';
 import PropertiesReader from 'properties-reader';
 import { env } from 'process'; 
 import { browser} from '@wdio/globals'
-
+import { ITestCaseHookParameter } from "@cucumber/cucumber";
 /**
  * Executes before a Cucumber scenario.
- * @param {any} world - The Cucumber World object containing information about the scenario.
- * @returns {Promise<void>} - A Promise that resolves after updating properties and saving screenshots.
+ * @param {ITestCaseHookParameter} world - The Cucumber World object containing information about the scenario.
+ * 
  */
-async function hookBeforeScenario(world:any) {
-  globalVariables.featureNameBefore = world.gherkinDocument.feature.name
+async function hookBeforeScenario(world: ITestCaseHookParameter) {
+  globalVariables.featureNameBefore = world.gherkinDocument.feature!.name
 }
 
 /**
@@ -33,10 +32,13 @@ async function hookBeforeStep(step: { text: string }): Promise<string | void> {
  * @param {string} scenario.name - The name of the scenario.
  * @param {object} step - An object containing information about the step.
  * @param {string} step.text - The description of the step.
- * @param {any} result - The result of the step execution.
+ * @param {object} result results object containing scenario results
+ * @param {boolean} result.passed true if scenario has passed
+ * @param {string} result.error error stack if scenario failed
+ * @param {number} result.duration duration of scenario in milliseconds
  * @returns {Promise<void>} - A Promise that resolves after the function finishes executing.
  */
-async function hookAfterStep (scenario:{name:string}, step:{text:string}, result:any): Promise<void> {
+async function hookAfterStep (scenario:{name:string}, step:{text:string}, result:{passed:boolean}): Promise<void> {
     globalVariables.urlAfterStep = await browser.getUrl();
     if (result.passed) {
       if (globalVariables.os === 'linux') {
@@ -62,10 +64,10 @@ async function hookAfterStep (scenario:{name:string}, step:{text:string}, result
  * Executes after a Cucumber scenario completes.
  * Updates properties in the Allure report and saves screenshots in case of failure.
  * @param {any} world - The Cucumber World object containing information about the scenario.
- * @param {any} result - The result of the scenario execution.
+ * @param {any} result results object containing scenario results
  * @returns {Promise<void>} - A Promise that resolves after updating properties and saving screenshots.
  */
-async function hooksAfterScenario(world: any, result: any): Promise<void> {
+async function hooksAfterScenario(world: any, result:any): Promise<void> {
     const propertiesPath = globalVariables.allureProperties;
     const properties = PropertiesReader(propertiesPath);
     const allureHostUrl = () => {

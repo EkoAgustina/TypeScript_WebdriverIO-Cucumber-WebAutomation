@@ -1,5 +1,4 @@
 import globalVariables from "../resources/globalVariable.ts"
-import { readdirSync, mkdirSync, existsSync } from 'node:fs';
 
 const allureConfig = {
     outputDir: 'reporter/allure-results',
