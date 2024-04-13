@@ -24,7 +24,8 @@
   },
   "scripts": {
     "wdio": "wdio run ./config/browser.conf.ts",
-    "lint": "eslint --ext .js,.ts"
+    "lint": "eslint . --ext .ts",
+    "test": "eslint . --ext .ts && wdio run ./config/browser.conf.ts"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.9",
