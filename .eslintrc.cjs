@@ -9,9 +9,9 @@ module.exports = {
     parserOptions: {
       ecmaVersion: 'latest',
       sourceType: "module",
-      project: "./tsconfig.json" // path to your tsconfig.json
+      project: "./tsconfig.json"
     },
     rules: {
-      // tambahkan aturan tambahan sesuai kebutuhan Anda
+        //
     }
   };
