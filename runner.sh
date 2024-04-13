@@ -6,6 +6,6 @@ export cucumberTagExpression=${cucumberTags}
 export browserName=${browserName}
 export hostName=${hostName}
 
-yarn wdio
+yarn test
 
 # allure generate reporter/allure-results --clean && allure open
