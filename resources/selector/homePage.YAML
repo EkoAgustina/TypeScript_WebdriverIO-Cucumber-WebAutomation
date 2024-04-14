@@ -1,1 +1,1 @@
-homePage_texLeft: 'By.xpath => //div[@class="text-left"]'
+homeContent: 'By.xpath => //div[@class="text-left"]'
