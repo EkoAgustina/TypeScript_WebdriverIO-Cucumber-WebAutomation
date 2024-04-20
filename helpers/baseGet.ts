@@ -1,4 +1,5 @@
 import { findElement } from "./baseScreen.ts";
+import { keyElement } from "../mappings/mapper.ts"
 
 
 /**
@@ -11,7 +12,7 @@ async function actionGetText (locator:string): Promise<string> {
     const textValue = await (await findElement(locator)).getText()
   
     if (textValue === '' || textValue === null) {
-      throw new Error('Text Not Found');
+      throw new Error(`Cannot get text on element '${keyElement(locator)}'`);
     } else {
       console.log('Its value: ', textValue);
       return textValue;
