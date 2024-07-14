@@ -41,7 +41,8 @@ myGithubUrl: "https://github.com/EkoAgustina"
 myLinkedinUrl: ""
 #########################################
 
-
+testData_aboutTitle: "About Me | Eko Agustina"
+testData_projectTitle: "My Projects | Eko Agustina"
 testData_validWebTitle: "Eko Agustina"
 testData_homePageUrl: "https://ekoagustina.my.id/"
 testData_aboutPageUrl: "https://ekoagustina.my.id/about"

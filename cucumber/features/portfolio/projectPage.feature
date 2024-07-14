@@ -8,6 +8,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     And User take screenshot with file name "1.projectPage_homePage"
     When User click "navbar:navProjectIcon"
     Then Currently opened website URL is equal with "testData:testData_projectPageUrl"
+    Then Title currently opened website is equal with "testData:testData_projectTitle"
     Then Element "projectPage:projectPageTitle" is displayed
     Then Element "projectPage:projectContentTitleOne" is equal with data "testData:testData_projectContentTitleOne"
     Then Element "projectPage:projectContentOne" is equal with data "testData:testData_projectContentOne"
@@ -32,7 +33,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
 @portfolio @projectPage @projectPage_viaPathUrl
 Scenario: Verify the user successfully redirected to Project page when adding URL path `project` to base URL
     Given User open "https://ekoagustina.my.id/project"
-    Then Title currently opened website is equal with "testData:testData_validWebTitle"
+    Then Title currently opened website is equal with "testData:testData_projectTitle"
     Then Currently opened website URL is equal with "testData:testData_projectPageUrl"
     Then Element "projectPage:projectPageTitle" is displayed
     Then Element "projectPage:projectContentTitleOne" is equal with data "testData:testData_projectContentTitleOne"
@@ -63,6 +64,7 @@ Scenario: Verify users can see Navbar component on Project page
     And User take screenshot with file name "1.projectPage_homePage"
     When User click "navbar:navProjectIcon"
     Then Currently opened website URL is equal with "testData:testData_projectPageUrl"
+    Then Title currently opened website is equal with "testData:testData_projectTitle"
     Then Element "projectPage:projectPageTitle" is displayed
     Then Element "navbar:navHomeIcon" is displayed
     Then Element "navbar:navAboutIcon" is displayed
@@ -90,7 +92,7 @@ Scenario: Verify users can see Navbar component on Project page
 @portfolio @projectPage @projectPage_footerComponent
 Scenario: Verify users can see Footer component on Project page
     Given User open "https://ekoagustina.my.id/project"
-    Then Title currently opened website is equal with "testData:testData_validWebTitle"
+    Then Title currently opened website is equal with "testData:testData_projectTitle"
     Then Currently opened website URL is equal with "testData:testData_projectPageUrl"
     Then Element "projectPage:projectPageTitle" is displayed
     Then Element "projectPage:projectContentTitleOne" is equal with data "testData:testData_projectContentTitleOne"
