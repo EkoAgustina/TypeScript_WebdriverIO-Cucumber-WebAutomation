@@ -1,5 +1,7 @@
 ############ Home test data ############
 testData_homeContent: "HI, I'AM\nEko Agustina\nQA Automation Engineer | SDET"
+testData_homeContent_sayHi: "HI, I'AM"
+testData_homeContent_mame: "Eko Agustina"
 #########################################
 
 ############ About test data ############
