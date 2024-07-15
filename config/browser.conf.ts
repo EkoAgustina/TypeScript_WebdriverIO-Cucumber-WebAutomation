@@ -10,7 +10,7 @@ if (globalVariables.os === 'linux') {
           maxInstances: 5,
           browserName: 'chrome',
           'goog:chromeOptions': {
-            args: ['--headless', '--no-sandbox', '--disable-gpu', 'disable-dev-shm-usage', '--disable-cache']
+            args: ['--headless', '--no-sandbox', '--disable-gpu', 'disable-dev-shm-usage', '--disable-cache', `--user-agent=${env.CUSTOM_USER_AGENT_CHROME_HEADLESS}`]
           },
           acceptInsecureCerts: true
         }
@@ -25,7 +25,7 @@ if (globalVariables.os === 'linux') {
                     maxInstances: 5,
                     browserName: 'chrome',
                     'goog:chromeOptions': {
-                    args: ['headless', 'disable-gpu', '--disable-cache']
+                    args: ['headless', '--no-sandbox','disable-gpu', '--disable-cache', `--user-agent=${env.CUSTOM_USER_AGENT_CHROME_HEADLESS}`]
                     },
                     acceptInsecureCerts: true  
                 }
