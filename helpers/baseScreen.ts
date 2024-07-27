@@ -48,27 +48,62 @@ function sleep (duration:number) {
  * @param {string} url - The URL to navigate to.
  * @returns {Promise<void>} A promise that resolves when the browser is opened and the URL is loaded.
  */
-async function baseOpenBrowser(url:string): Promise<void> {
-    const browserName = env.browserName;
-    await browser.url(url);
-    if (globalVariables.os === 'linux') {
-      await browser.setWindowSize(1470,860);
-    }
-    else {
+async function baseOpenBrowser(url: string): Promise<void> {
+  const browserName = env.browserName;
+
+  const locations = [
+      { latitude: -6.902516, longitude: 107.618782 }, // Bandung
+      { latitude: -6.3597485502896545, longitude: 106.8272343 }, // Depok
+      { latitude: 3.562682562085971, longitude: 98.65840223634574 }, // Medan
+      { latitude: -7.770860000118525, longitude: 110.3780433227243 }, // UGM
+      { latitude: -7.932413460573722, longitude: 112.60569427952304 } // Malang
+  ];
+
+  const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+
+  await browser.execute((latitude, longitude) => {
+      navigator.geolocation.getCurrentPosition = (success) => {
+          success({
+              coords: {
+                  latitude: latitude,
+                  longitude: longitude,
+                  accuracy: 100, // Adjust accuracy as needed
+                  altitude: null, // Set as needed
+                  altitudeAccuracy: null, // Set as needed
+                  heading: null, // Set as needed
+                  speed: null, // Set as needed
+                  toJSON: function () {
+                      throw new Error('Function not implemented.');
+                  }
+              },
+              timestamp: 0,
+              toJSON: function () {
+                  throw new Error('Function not implemented.');
+              }
+          });
+      };
+  }, randomLocation.latitude, randomLocation.longitude);
+
+  await browser.url(url);
+
+  if (globalVariables.os === 'linux') {
+      await browser.setWindowSize(1470, 860);
+  } else {
       switch (browserName) {
-        case 'headless':
-          await browser.setWindowSize(1470,920);
-        break;
-        case 'chrome':
-          await browser.fullscreenWindow();
-        break;
-        default:
-          throw new Error (`Unknown condition!`)
+          case 'headless':
+              await browser.setWindowSize(1470, 920);
+              break;
+          case 'chrome':
+              await browser.fullscreenWindow();
+              break;
+          default:
+              throw new Error('Unknown condition!');
       }
-    }
-    const windowSizeString = `Width: ${(await browser.getWindowSize()).width}, Height: ${(await browser.getWindowSize()).height}`;
-    log('INFO', windowSizeString)
-    await browser.pause(3000)
+  }
+
+  const windowSizeString = `Width: ${(await browser.getWindowSize()).width}, Height: ${(await browser.getWindowSize()).height}`;
+  log('INFO', windowSizeString);
+  await browser.pause(3000);
 }
 
 /**
