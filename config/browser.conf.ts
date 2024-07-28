@@ -1,3 +1,4 @@
+import axios from "axios";
 import { customGeolocation } from "../helpers/baseScreen.ts";
 import globalVariables from "../resources/globalVariable.ts";
 import { config } from "./wdio.conf.ts"
@@ -70,4 +71,10 @@ config.before = async () => {
 
 };
 
+config.after = async () => {
+    const response = await axios.get('https://ipinfo.io/json');
+    console.log(`------Current IP------`);
+    console.log(response.data)
+    console.log(`------Current IP------`);
+}
 export default { config };
