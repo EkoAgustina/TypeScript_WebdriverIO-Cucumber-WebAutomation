@@ -12,7 +12,8 @@
             "node",
             "@wdio/globals/types",
             "expect-webdriverio",
-            "@wdio/cucumber-framework"
+            "@wdio/cucumber-framework",
+            "@wdio/devtools-service",
         ],
         "skipLibCheck": true,
         "noEmit": true,

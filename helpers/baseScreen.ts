@@ -43,6 +43,20 @@ function sleep (duration:number) {
     } while (currentDate - date < duration * 1000);
 }
 
+async function customGeolocation(customLatitude:any, customLongitude:any) {
+  await browser.emulate('geolocation', {
+    latitude: customLatitude,
+    longitude: customLongitude,
+    accuracy: 100
+})
+
+  await browser.sendCommand('Emulation.setGeolocationOverride', {
+    latitude: customLatitude,
+    longitude: customLongitude,
+    accuracy: 100
+});
+}
+
 /**
  * Opens the browser and navigates to the specified URL.
  * @param {string} url - The URL to navigate to.
@@ -50,40 +64,6 @@ function sleep (duration:number) {
  */
 async function baseOpenBrowser(url: string): Promise<void> {
   const browserName = env.browserName;
-
-  const locations = [
-      { latitude: -6.902516, longitude: 107.618782 }, // Bandung
-      { latitude: -6.3597485502896545, longitude: 106.8272343 }, // Depok
-      { latitude: 3.562682562085971, longitude: 98.65840223634574 }, // Medan
-      { latitude: -7.770860000118525, longitude: 110.3780433227243 }, // UGM
-      { latitude: -7.932413460573722, longitude: 112.60569427952304 } // Malang
-  ];
-
-  const randomLocation = locations[Math.floor(Math.random() * locations.length)];
-
-  await browser.execute((latitude, longitude) => {
-      navigator.geolocation.getCurrentPosition = (success) => {
-          success({
-              coords: {
-                  latitude: latitude,
-                  longitude: longitude,
-                  accuracy: 100, // Adjust accuracy as needed
-                  altitude: null, // Set as needed
-                  altitudeAccuracy: null, // Set as needed
-                  heading: null, // Set as needed
-                  speed: null, // Set as needed
-                  toJSON: function () {
-                      throw new Error('Function not implemented.');
-                  }
-              },
-              timestamp: 0,
-              toJSON: function () {
-                  throw new Error('Function not implemented.');
-              }
-          });
-      };
-  }, randomLocation.latitude, randomLocation.longitude);
-
   await browser.url(url);
 
   if (globalVariables.os === 'linux') {
@@ -210,4 +190,4 @@ function cleanDirectory (directoryPath:string) {
     }
 }
 
-export {baseOpenBrowser, findElement, takeScreenshot, sleep, pageLoad, stdoutAnsiColor, getCurrentDate, cleanDirectory, log}
+export {baseOpenBrowser, findElement, takeScreenshot, sleep, pageLoad, stdoutAnsiColor, getCurrentDate, cleanDirectory, log, customGeolocation}
