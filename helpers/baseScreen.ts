@@ -44,11 +44,11 @@ function sleep (duration:number) {
 }
 
 async function customGeolocation(customLatitude:any, customLongitude:any) {
-  await browser.emulate('geolocation', {
-    latitude: customLatitude,
-    longitude: customLongitude,
-    accuracy: 100
-})
+//   await browser.emulate('geolocation', {
+//     latitude: customLatitude,
+//     longitude: customLongitude,
+//     accuracy: 100
+// })
 
   await browser.sendCommand('Emulation.setGeolocationOverride', {
     latitude: customLatitude,

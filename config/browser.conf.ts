@@ -12,10 +12,10 @@ if (globalVariables.os === 'linux') {
             maxInstances: 5,
             browserName: 'chrome',
             'goog:chromeOptions': {
-                args: ['--headless', '--no-sandbox', '--disable-gpu', 'disable-dev-shm-usage', '--disable-cache', `--user-agent=${env.CUSTOM_USER_AGENT_CHROME_HEADLESS}`]
+                args: ['--headless', '--no-sandbox', '--disable-gpu', 'disable-dev-shm-usage', '--disable-cache', `--user-agent=${globalVariables.randomUserAgent}`]
             },
             acceptInsecureCerts: true,
-            webSocketUrl: true
+            // webSocketUrl: true
         }
     ];
     config.services = [];
@@ -31,7 +31,7 @@ if (globalVariables.os === 'linux') {
                         args: ['headless', '--no-sandbox', 'disable-gpu', '--disable-cache', `--user-agent=${env.CUSTOM_USER_AGENT_CHROME_HEADLESS}`]
                     },
                     acceptInsecureCerts: true,
-                    webSocketUrl: true
+                    // webSocketUrl: true
                 }
             ];
             break;
@@ -44,7 +44,7 @@ if (globalVariables.os === 'linux') {
                     },
                     maxInstances: 5,
                     acceptInsecureCerts: true,
-                    webSocketUrl: true
+                    // webSocketUrl: true
                 }
             ];
             break;
@@ -55,19 +55,7 @@ if (globalVariables.os === 'linux') {
 
 config.before = async () => {
 
-    const locations = [
-        { latitude: -6.902516, longitude: 107.618782 }, // Bandung
-        { latitude: -6.3597485502896545, longitude: 106.8272343 }, // Depok
-        { latitude: 3.562682562085971, longitude: 98.65840223634574 }, // Medan
-        { latitude: -7.770860000118525, longitude: 110.3780433227243 }, // UGM
-        { latitude: -7.932413460573722, longitude: 112.60569427952304 } // Malang
-    ];
-
-    const randomLocation = locations[Math.floor(Math.random() * locations.length)];
-    const setLatitude = randomLocation.latitude
-    const setLongtitude = randomLocation.longitude
-
-    customGeolocation(setLatitude, setLongtitude)
+    customGeolocation(globalVariables.setLatitude, globalVariables.setLongitude)
 
 };
 
