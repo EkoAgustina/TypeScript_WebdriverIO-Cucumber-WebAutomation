@@ -1,5 +1,5 @@
 browserName='headless'
-cucumberTags='@homePage_Navbar'
+cucumberTags='@projectPage_viaHomePage'
 hostName='localhost:8080'
 
 export cucumberTagExpression=${cucumberTags}

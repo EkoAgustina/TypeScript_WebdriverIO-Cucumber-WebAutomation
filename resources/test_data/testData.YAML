@@ -22,7 +22,7 @@ testData_projectContentTitleFour: "API automation test with Mocha Chai"
 testData_projectContentFour: "By combining Mocha, Chai, SuperTest, and Node.js, API automation testing benefits from a well-organized test structure, readable assertions, and convenient HTTP request handling, contributing to the effectiveness and maintainability of API test suites."
 
 testData_projectContentTitleFive: "Mobile automation test with Appium, JUnit and Cucumber"
-testData_projectContentFive: "One of the advantages of mobile automation with Appium using JUnit is structured testing, facilitating smooth integration into CI/CD workflows, ensuring efficient and reliable mobile app development"
+testData_projectContentFive: "One of the advantages of mobile automation with Appium using JUnit is structured testing, facilitating smooth integration into CI/CD workflows, ensuring efficient and reliable mobile app development."
 
 testData_projectContentTitleSix: "Web automation test with Selenium, JUnit and Cucumber"
 testData_projectContentSix: "Using Selenium for web automation with JUnit offers the advantage of organized testing structures, seamless integration with testing tools and reporting, and efficient regression testing to ensure application stability."
