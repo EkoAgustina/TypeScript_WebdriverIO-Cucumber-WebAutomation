@@ -9,8 +9,8 @@ projectContentTwo: 'By.id => projectDescription_title_Web_automation_test_with_W
 projectContentTitleThree: 'By.id => projectTitle_API_automation_test_with_RestAssured'
 projectContentThree: 'By.id => projectDescription_title_API_automation_test_with_RestAssured'
 
-projectContentTitleFour: 'By.id => projectTitle_API_automation_test_with_Mocha_Chai'
-projectContentFour: 'By.id => projectDescription_title_API_automation_test_with_Mocha_Chai'
+projectContentTitleFour: 'By.xpath => //h5[@id="projectTitle_API_Automation_Using_SuperTest,_Mocha_and_Chai"]'
+projectContentFour: 'By.xpath => //p[@id="projectDescription_title_API_Automation_Using_SuperTest,_Mocha_and_Chai"]'
 
 projectContentTitleFive: 'By.xpath => //h5[@id="projectTitle_Mobile_automation_test_with_Appium,_JUnit_and_Cucumber"]'
 projectContentFive: 'By.xpath => //p[@id="projectDescription_title_Mobile_automation_test_with_Appium,_JUnit_and_Cucumber"]'
