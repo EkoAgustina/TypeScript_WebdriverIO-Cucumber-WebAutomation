@@ -6,6 +6,7 @@ import { existsSync, readdirSync, mkdirSync } from 'node:fs';
 import { keyElement } from "../mappings/mapper.ts";
 import globalVariables from "../resources/globalVariable.ts"
 import { env } from 'process';
+import cucumberJson from 'wdio-cucumberjs-json-reporter';
 
 
 
@@ -144,7 +145,7 @@ async function takeScreenshot (name:string) {
     mkdirSync(checkDirectories)
   }
   await browser.saveScreenshot('./screenshot/' + name + '.png');
-    // cucumberJson.attach(await browser.takeScreenshot(), 'image/png');
+    cucumberJson.attach(await browser.takeScreenshot(), 'image/png');
 }
 
 
