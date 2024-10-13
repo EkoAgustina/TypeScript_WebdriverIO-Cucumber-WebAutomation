@@ -1,7 +1,7 @@
 import type { Options } from '@wdio/types'
 import { env } from 'process';
 import { hookBeforeStep, hookAfterStep, hooksAfterScenario, hookBeforeScenario } from "../hooks/driverHooks.ts"
-import { specConfig, allureConfig, cucumberJsonConfig } from "./report.conf.ts"
+import { specConfig, allureConfig } from "./report.conf.ts"
 export const config: Options.Testrunner = {
     //
     // ====================
