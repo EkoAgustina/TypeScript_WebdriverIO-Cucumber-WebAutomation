@@ -138,7 +138,7 @@ export const config: Options.Testrunner = {
     reporters: [
         ['spec', specConfig],
         ['allure', allureConfig],
-        ['cucumberjs-json', cucumberJsonConfig]
+        // ['cucumberjs-json', cucumberJsonConfig]
       ],
 
     // If you are using Cucumber you need to specify the location of your step definitions.
