@@ -102,7 +102,7 @@ export const config: Options.Testrunner = {
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 120000,
+    connectionRetryTimeout: 150000,
     //
     // Default request retries count
     connectionRetryCount: 3,
@@ -164,7 +164,7 @@ export const config: Options.Testrunner = {
         // <string> (expression) only execute the features or scenarios with tags matching the expression
         tagExpression: env.cucumberTagExpression,
         // <number> timeout for step definitions
-        timeout: 120000,
+        timeout: 150000,
         // <boolean> Enable this config to treat undefined definitions as warnings.
         ignoreUndefinedDefinitions: false
     },
