@@ -1,7 +1,7 @@
 import type { Options } from '@wdio/types'
 import { env } from 'process';
 import { hookBeforeStep, hookAfterStep, hooksAfterScenario, hookBeforeScenario } from "../hooks/driverHooks.ts"
-import { specConfig, allureConfig } from "./report.conf.ts"
+import { specConfig, allureConfig, cucumberJsonConfig } from "./report.conf.ts"
 export const config: Options.Testrunner = {
     //
     // ====================
@@ -138,6 +138,7 @@ export const config: Options.Testrunner = {
     reporters: [
         ['spec', specConfig],
         ['allure', allureConfig],
+        ['cucumberjs-json', cucumberJsonConfig]
       ],
 
     // If you are using Cucumber you need to specify the location of your step definitions.
