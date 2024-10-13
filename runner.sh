@@ -1,6 +1,6 @@
 browserName='headless'
-cucumberTags='@projectPage_viaHomePage'
-hostName='localhost:8080'
+cucumberTags='@aboutPage'
+hostName='103.175.221.85:4444'
 
 export cucumberTagExpression=${cucumberTags}
 export browserName=${browserName}

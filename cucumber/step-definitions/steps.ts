@@ -11,8 +11,12 @@ import { swipeUpwithTime } from "../../helpers/baseSwipe.ts"
  * @returns {Promise<void>} - A Promise that resolves after the page is opened.
  */
 Given(/^User open "(.*)"$/, async (page: string) => {
-    await baseOpenBrowser(page);
-    await pageLoad(5);
+    try {
+        await baseOpenBrowser(page);
+        await pageLoad(5);
+    } catch (err) {
+        throw err;
+    }
     
 });
 
@@ -23,8 +27,12 @@ Given(/^User open "(.*)"$/, async (page: string) => {
  * @returns {Promise<void>} - A Promise that resolves after the click action is performed.
  */
 When(/^User click "(.*)"$/, async (locator) => {
-    await actionClick(locator);
-    sleep(3);
+    try {
+
+    } catch(err) {
+        await actionClick(locator);
+        sleep(3);
+    }
 });
 
 /**
@@ -35,7 +43,11 @@ When(/^User click "(.*)"$/, async (locator) => {
  * @returns {Promise<void>} - A Promise that resolves after checking the element's visibility.
  */
 Then(/^Element "(.*)" (is displayed|not displayed)$/, async (locator, condition) => {
-    await elementDisplayed(locator, condition);
+    try{
+        await elementDisplayed(locator, condition);
+    } catch(err) {
+        throw err
+    }
 });
 
 /**
@@ -47,7 +59,11 @@ Then(/^Element "(.*)" (is displayed|not displayed)$/, async (locator, condition)
  * @returns {Promise<void>} - A Promise that resolves after the comparison is done.
  */
 Then(/^Element "(.*)" is (equal|not equal) with data "(.*)"$/, async (locator, condition, testData) => {
-    await equalData(condition, locator, testData);
+    try{
+        await equalData(condition, locator, testData);
+    } catch(err) {
+        throw err
+    }
   }
 );
 
@@ -59,9 +75,13 @@ Then(/^Element "(.*)" is (equal|not equal) with data "(.*)"$/, async (locator, c
  * @returns {Promise<void>} - A Promise that resolves after the element is found or if it's already displayed.
  */
 When(/^User swipe up until he finds element "(.*)"$/, async (locator) => {
-    // await swipeUpElDisplayed(locator)
-    console.log(locator)
-    await swipeUpwithTime(1)
+    try{
+        console.log(locator)
+        await swipeUpwithTime(1)
+    } catch(err) {
+        throw err
+    }
+    
 });
 
 /**
@@ -70,8 +90,11 @@ When(/^User swipe up until he finds element "(.*)"$/, async (locator) => {
  * @param {number} duration - The duration of the swipe action, specified in seconds.
  */
 When(/^User swipe up until (.*) seconds$/, async (duration:number) => {
-    console.log(duration)
-    await swipeUpwithTime(duration)
+    try{
+        await swipeUpwithTime(duration)
+    } catch(err) {
+        throw err
+    }
 });
 
 /**
@@ -80,7 +103,11 @@ When(/^User swipe up until (.*) seconds$/, async (duration:number) => {
  * @param {string} testData - The expected title to be compared with the title of the currently opened website.
  */
 Then(/^Title currently opened website is (equal|not equal) with "(.*)"$/, async (condition, testData) => {
-    await titleEqual(condition, testData);
+    try{
+        await titleEqual(condition, testData);
+    } catch(err) {
+        throw err
+    }
   }
 );
 
@@ -90,7 +117,11 @@ Then(/^Title currently opened website is (equal|not equal) with "(.*)"$/, async 
  * @param {string} testData - The expected URL to be compared with the URL of the currently opened website.
  */
 Then(/^Currently opened website URL is (equal|not equal) with "(.*)"$/, async (condition, testData) => {
-    await urlEqual(condition, testData);
+    try{
+        await urlEqual(condition, testData);
+    } catch(err) {
+        throw err
+    }
   }
 );
 
@@ -99,5 +130,9 @@ Then(/^Currently opened website URL is (equal|not equal) with "(.*)"$/, async (c
  * @param {string} name - The file name for the screenshot.
  */
 Then(/^User take screenshot with file name "(.*)"$/, async (name) => {
-    await takeScreenshot(name);
+    try{
+        await takeScreenshot(name);
+    } catch(err) {
+        throw err
+    }
 });
