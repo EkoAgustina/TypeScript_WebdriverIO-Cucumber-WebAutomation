@@ -6,6 +6,7 @@ import { existsSync, readdirSync, mkdirSync } from 'node:fs';
 import { keyElement } from "../mappings/mapper.ts";
 import globalVariables from "../resources/globalVariable.ts"
 import { env } from 'process';
+// import { Key } from 'webdriverio'
 // import cucumberJson from 'wdio-cucumberjs-json-reporter';
 
 
@@ -191,4 +192,14 @@ function cleanDirectory (directoryPath:string) {
     }
 }
 
-export {baseOpenBrowser, findElement, takeScreenshot, sleep, pageLoad, stdoutAnsiColor, getCurrentDate, cleanDirectory, log, customGeolocation}
+/**
+ * Simulates pressing the "Enter" key on the keyboard.
+ * @returns {Promise<void>} A promise that resolves when the key action is completed.
+ */
+async function actionEnter(): Promise<void> {
+  // const browserName = env.browserName;
+  await browser.keys('Enter')
+
+}
+
+export {baseOpenBrowser, findElement, takeScreenshot, sleep, pageLoad, stdoutAnsiColor, getCurrentDate, cleanDirectory, log, customGeolocation, actionEnter}

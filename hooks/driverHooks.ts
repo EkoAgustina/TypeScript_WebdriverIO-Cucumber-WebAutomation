@@ -2,9 +2,12 @@ import { pageLoad, sleep, takeScreenshot, log } from "../helpers/baseScreen.ts";
 import globalVariables from "../resources/globalVariable.ts";
 // import * as propertiesReader from 'properties-reader';
 import PropertiesReader from 'properties-reader';
-import { env } from 'process'; 
-import { browser} from '@wdio/globals'
+import { env } from 'process';
+import { browser } from '@wdio/globals'
 import { ITestCaseHookParameter } from "@cucumber/cucumber";
+
+let windowSizeString_before: string;
+let windowSizeString_after: string;
 /**
  * Executes before a Cucumber scenario.
  * @param {ITestCaseHookParameter} world - The Cucumber World object containing information about the scenario.
@@ -21,9 +24,10 @@ async function hookBeforeScenario(world: ITestCaseHookParameter) {
  * @returns {Promise<string | void>} - A Promise that resolves with the URL before the step starts, if the step is not 'User open'.
  */
 async function hookBeforeStep(step: { text: string }): Promise<string | void> {
-    if (!step.text.includes('User open')) {
-      return (globalVariables.urlBeforeStep = await browser.getUrl());
-    }
+  if (!step.text.includes('User open')) {
+    windowSizeString_before = `Width: ${(await browser.getWindowSize()).width}, Height: ${(await browser.getWindowSize()).height}`
+    return (globalVariables.urlBeforeStep = await browser.getUrl());
+  }
 }
 
 /**
@@ -38,26 +42,45 @@ async function hookBeforeStep(step: { text: string }): Promise<string | void> {
  * @param {number} result.duration duration of scenario in milliseconds
  * @returns {Promise<void>} - A Promise that resolves after the function finishes executing.
  */
-async function hookAfterStep (scenario:{name:string}, step:{text:string}, result:{passed:boolean}): Promise<void> {
-    globalVariables.urlAfterStep = await browser.getUrl();
-    if (result.passed) {
-      if (globalVariables.os === 'linux') {
-        log("INFO", `${scenario.name}`)
-        log("INFO", `✓ ${step.text} is passed`)
-      }
-      else {
+async function hookAfterStep(scenario: { name: string }, step: { text: string }, result: { passed: boolean }): Promise<void> {
+  globalVariables.urlAfterStep = await browser.getUrl();
+  if (result.passed) {
+    if (globalVariables.os === 'linux') {
+      log("INFO", `${scenario.name}`)
+      log("INFO", `✓ ${step.text} is passed`)
+    }
+    else {
       log("INFO", `\x1b[33m ${scenario.name} \x1b[0m`)
       log("INFO", `\x1b[33m ✓ ${step.text} is passed \x1b[0m`)
+    }
+    sleep(1);
+    if (step.text.includes('User open') !== true) {
+      if (globalVariables.urlBeforeStep !== globalVariables.urlAfterStep) {
+        await pageLoad(5);
+        sleep(3);
       }
-      sleep(1);
-      if (step.text.includes('User open') !== true) {
-        if (globalVariables.urlBeforeStep !== globalVariables.urlAfterStep) {
-          await pageLoad(5);
-          sleep(3);
+    }
+    windowSizeString_after = `Width: ${(await browser.getWindowSize()).width}, Height: ${(await browser.getWindowSize()).height}`;
+
+    if (windowSizeString_before != windowSizeString_after) {
+      const browserName = env.browserName;
+      if (globalVariables.os === 'linux') {
+        await browser.setWindowSize(1470, 860);
+      } else {
+        switch (browserName) {
+          case 'headless':
+            await browser.setWindowSize(1470, 920);
+            break;
+          case 'chrome':
+            await browser.fullscreenWindow();
+            break;
+          default:
+            throw new Error('Unknown condition!');
         }
       }
-      sleep(1);
     }
+    sleep(1);
+  }
 }
 
 /**
@@ -67,30 +90,30 @@ async function hookAfterStep (scenario:{name:string}, step:{text:string}, result
  * @param {any} result results object containing scenario results
  * @returns {Promise<void>} - A Promise that resolves after updating properties and saving screenshots.
  */
-async function hooksAfterScenario(world: any, result:any): Promise<void> {
-    const propertiesPath = globalVariables.allureProperties;
-    const properties = PropertiesReader(propertiesPath);
-    const allureHostUrl = () => {
-      if (env.hostName === 'localhost:8080') {
-        return 'localhost:8080'
-      } else if (env.hostName === 'localhost:4444') {
-        return 'selenium/standalone-chrome'
-      }
+async function hooksAfterScenario(world: any, result: any): Promise<void> {
+  const propertiesPath = globalVariables.allureProperties;
+  const properties = PropertiesReader(propertiesPath);
+  const allureHostUrl = () => {
+    if (env.hostName === 'localhost:8080') {
+      return 'localhost:8080'
+    } else if (env.hostName === 'localhost:4444') {
+      return 'selenium/standalone-chrome'
     }
-    globalVariables.featureNameAfter = world.gherkinDocument.feature.name
+  }
+  globalVariables.featureNameAfter = world.gherkinDocument.feature.name
 
-    // if (globalVariables.featureNameBefore !== globalVariables.featureNameAfter) {
-    //   await browser.reloadSession()
-    // }
+  // if (globalVariables.featureNameBefore !== globalVariables.featureNameAfter) {
+  //   await browser.reloadSession()
+  // }
 
-    // properties.set('Services', globalVariables.services);
-    properties.set('Host', allureHostUrl() || 'Unknown');
-    properties.save(propertiesPath);
+  // properties.set('Services', globalVariables.services);
+  properties.set('Host', allureHostUrl() || 'Unknown');
+  properties.save(propertiesPath);
 
-    if (result.error) {
-      await takeScreenshot(`failed_${world.pickle.name}`)
-        // cucumberJson.attach(await browser.takeScreenshot(), 'image/png');
-    }
+  if (result.error) {
+    await takeScreenshot(`failed_${world.pickle.name}`)
+    // cucumberJson.attach(await browser.takeScreenshot(), 'image/png');
+  }
 }
 
 export { hookAfterStep, hooksAfterScenario, hookBeforeStep, hookBeforeScenario };

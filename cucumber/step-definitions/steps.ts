@@ -1,8 +1,9 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
-import { baseOpenBrowser, takeScreenshot, pageLoad, sleep } from '../../helpers/baseScreen.ts';
+import { baseOpenBrowser, takeScreenshot, pageLoad, sleep, actionEnter } from '../../helpers/baseScreen.ts';
 import { actionClick } from '../../helpers/baseClick.ts';
 import { elementDisplayed, equalData, titleEqual, urlEqual } from '../../helpers/baseExpect.ts';
 import { swipeUpwithTime } from "../../helpers/baseSwipe.ts";
+import { actionFill } from '../../helpers/baseFill.ts';
 
 /**
  * Step definition for the Cucumber step: Given User open "<page>".
@@ -94,3 +95,23 @@ Then(/^Currently opened website URL is (equal|not equal) with "(.*)"$/, async (c
 Then(/^User take screenshot with file name "(.*)"$/, async (name) => {
     await takeScreenshot(name);
 });
+
+/**
+ * Step definition for filling an input element with the specified data.
+ * @param {string} locator - The locator string to identify the input element.
+ * @param {string} test_data - The data to fill into the input element.
+ */
+Then(/^User fill "(.*)" with data "(.*)"$/, async (locator, test_data) => {
+    await actionFill(locator,test_data);
+});
+
+/**
+ * Step definition for simulating a press of the "Enter" key.
+ * This step also includes a sleep for 3 seconds after the key press.
+ */
+Then(/^User press enter$/, async () => {
+    await actionEnter();
+    sleep(1);
+});
+
+

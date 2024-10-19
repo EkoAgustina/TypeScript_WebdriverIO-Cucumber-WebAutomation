@@ -1,0 +1,2 @@
+google_main_search_field: 'By.xpath => //div/textarea'
+google_url_portfolio: 'By.xpath => //a[@href="https://ekoagustina.my.id/"]'

@@ -119,3 +119,35 @@ Scenario: Verify users can see Footer component on Project page
     Then Element "footer:footerLinkedinIcon" is displayed
     Then Element "footer:footerGithubIcon" is displayed
     And User take screenshot with file name "4.projectPageFooter"
+
+@portfolio @projectPage @projectPage_googleSearchEngine
+Scenario: Verify user successfully redirects to Project page when clicking Project on navbar on Home page via google search engine
+    Given User open "https://www.google.com"
+    And User fill "google:google_main_search_field" with data "testData:testData_validWebTitle"
+    And User press enter
+    And User take screenshot with file name "1.GoogleSearchEngine"
+    And User click "google:google_url_portfolio"
+    And User take screenshot with file name "2.projectPage_homePage"
+    When User click "navbar:navProjectIcon"
+    Then Currently opened website URL is equal with "testData:testData_projectPageUrl"
+    Then Title currently opened website is equal with "testData:testData_projectTitle"
+    Then Element "projectPage:projectPageTitle" is displayed
+    Then Element "projectPage:projectContentTitleOne" is equal with data "testData:testData_projectContentTitleOne"
+    Then Element "projectPage:projectContentOne" is equal with data "testData:testData_projectContentOne"
+    Then Element "projectPage:projectContentTitleTwo" is equal with data "testData:testData_projectContentTitleTwo"
+    Then Element "projectPage:projectContentTwo" is equal with data "testData:testData_projectContentTwo"
+    Then Element "projectPage:projectContentTitleThree" is equal with data "testData:testData_projectContentTitleThree"
+    Then Element "projectPage:projectContentThree" is equal with data "testData:testData_projectContentThree"
+    And User take screenshot with file name "3.projectPageFirstPart"
+    When User swipe up until 3 seconds
+    Then Element "projectPage:projectContentTitleFour" is equal with data "testData:testData_projectContentTitleFour"
+    Then Element "projectPage:projectContentFour" is equal with data "testData:testData_projectContentFour"
+    Then Element "projectPage:projectContentTitleFive" is equal with data "testData:testData_projectContentTitleFive"
+    Then Element "projectPage:projectContentFive" is equal with data "testData:testData_projectContentFive"
+    Then Element "projectPage:projectContentTitleSix" is equal with data "testData:testData_projectContentTitleSix"
+    Then Element "projectPage:projectContentSix" is equal with data "testData:testData_projectContentSix"
+    And User take screenshot with file name "4.projectPageMiddle"
+    When User swipe up until 3 seconds
+    Then Element "projectPage:projectContentTitleSeven" is equal with data "testData:testData_projectContentTitleSeven"
+    Then Element "projectPage:projectContentSeven" is equal with data "testData:testData_projectContentSeven"
+    And User take screenshot with file name "5.projectPageLastPart"
