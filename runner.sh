@@ -1,5 +1,5 @@
 browserName='headless'
-cucumberTags='@portfolio'
+cucumberTags='@aboutPage_googleSearchEngine_three'
 hostName='localhost'
 
 export cucumberTagExpression=${cucumberTags}

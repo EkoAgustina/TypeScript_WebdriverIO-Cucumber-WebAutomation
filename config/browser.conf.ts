@@ -9,7 +9,7 @@ if (globalVariables.os === 'linux') {
     config.port = parseInt(env.hostName!.split(':')[1]);
     config.capabilities = [
         {
-            maxInstances: 5,
+            maxInstances: 6,
             browserName: 'chrome',
             'goog:chromeOptions': {
                 args: ['--headless', '--no-sandbox', '--disable-gpu', 'disable-dev-shm-usage', '--disable-cache', `--user-agent=${globalVariables.randomUserAgent}`]
