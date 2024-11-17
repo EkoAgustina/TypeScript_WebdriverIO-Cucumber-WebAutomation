@@ -1,6 +1,5 @@
 import { pageLoad, sleep, takeScreenshot, log } from "../helpers/baseScreen.ts";
 import globalVariables from "../resources/globalVariable.ts";
-// import * as propertiesReader from 'properties-reader';
 import PropertiesReader from 'properties-reader';
 import { env } from 'process';
 import { browser } from '@wdio/globals'
@@ -53,11 +52,9 @@ async function hookAfterStep(scenario: { name: string }, step: { text: string },
       log("INFO", `\x1b[33m ${scenario.name} \x1b[0m`)
       log("INFO", `\x1b[33m ✓ ${step.text} is passed \x1b[0m`)
     }
-    sleep(1);
     if (step.text.includes('User open') !== true) {
       if (globalVariables.urlBeforeStep !== globalVariables.urlAfterStep) {
         await pageLoad(5);
-        sleep(3);
       }
     }
     windowSizeString_after = `Width: ${(await browser.getWindowSize()).width}, Height: ${(await browser.getWindowSize()).height}`;
@@ -101,18 +98,11 @@ async function hooksAfterScenario(world: any, result: any): Promise<void> {
     }
   }
   globalVariables.featureNameAfter = world.gherkinDocument.feature.name
-
-  // if (globalVariables.featureNameBefore !== globalVariables.featureNameAfter) {
-  //   await browser.reloadSession()
-  // }
-
-  // properties.set('Services', globalVariables.services);
   properties.set('Host', allureHostUrl() || 'Unknown');
   properties.save(propertiesPath);
 
   if (result.error) {
     await takeScreenshot(`failed_${world.pickle.name}`)
-    // cucumberJson.attach(await browser.takeScreenshot(), 'image/png');
   }
 }
 

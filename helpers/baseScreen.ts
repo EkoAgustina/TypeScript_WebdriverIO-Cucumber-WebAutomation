@@ -85,7 +85,7 @@ async function baseOpenBrowser(url: string): Promise<void> {
 
   const windowSizeString = `Width: ${(await browser.getWindowSize()).width}, Height: ${(await browser.getWindowSize()).height}`;
   log('INFO', windowSizeString);
-  await browser.pause(3000);
+  await browser.pause(1000);
 }
 
 /**

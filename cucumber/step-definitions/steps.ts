@@ -24,7 +24,6 @@ Given(/^User open "(.*)"$/, async (page: string) => {
  */
 When(/^User click "(.*)"$/, async (locator) => {
     await actionClick(locator);
-    sleep(3);
 });
 
 /**
