@@ -55,6 +55,7 @@ async function hookAfterStep(scenario: { name: string }, step: { text: string },
     if (step.text.includes('User open') !== true) {
       if (globalVariables.urlBeforeStep !== globalVariables.urlAfterStep) {
         await pageLoad(5);
+        sleep(1);
       }
     }
     windowSizeString_after = `Width: ${(await browser.getWindowSize()).width}, Height: ${(await browser.getWindowSize()).height}`;
