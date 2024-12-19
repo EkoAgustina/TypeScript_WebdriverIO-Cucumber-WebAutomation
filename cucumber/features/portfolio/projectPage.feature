@@ -7,7 +7,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     And User press enter
     And User take screenshot with file name "1.GoogleSearchEngine"
     And User click "google:google_url_portfolio"
-    And User take screenshot with file name "2.projectPage_homePage"
+    # And User take screenshot with file name "2.projectPage_homePage"
     When User click "navbar:navProjectIcon"
     Then Currently opened website URL is equal with "testData:testData_projectPageUrl"
     Then Title currently opened website is equal with "testData:testData_projectTitle"
@@ -39,7 +39,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     And User press enter
     And User take screenshot with file name "1.GoogleSearchEngine"
     And User click "google:google_url_portfolio"
-    And User take screenshot with file name "2.projectPage_homePage"
+    # And User take screenshot with file name "2.projectPage_homePage"
     When User click "navbar:navProjectIcon"
     Then Currently opened website URL is equal with "testData:testData_projectPageUrl"
     Then Title currently opened website is equal with "testData:testData_projectTitle"
@@ -64,7 +64,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     And User press enter
     And User take screenshot with file name "1.GoogleSearchEngine"
     And User click "google:google_url_portfolio"
-    And User take screenshot with file name "2.projectPage_homePage"
+    # And User take screenshot with file name "2.projectPage_homePage"
     When User click "navbar:navProjectIcon"
     Then Currently opened website URL is equal with "testData:testData_projectPageUrl"
     Then Title currently opened website is equal with "testData:testData_projectTitle"
@@ -89,7 +89,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     And User press enter
     And User take screenshot with file name "1.GoogleSearchEngine"
     And User click "google:google_url_portfolio"
-    And User take screenshot with file name "2.projectPage_homePage"
+    # And User take screenshot with file name "2.projectPage_homePage"
     When User click "navbar:navProjectIcon"
     Then Currently opened website URL is equal with "testData:testData_projectPageUrl"
     Then Title currently opened website is equal with "testData:testData_projectTitle"
@@ -114,7 +114,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     And User press enter
     And User take screenshot with file name "1.GoogleSearchEngine"
     And User click "google:google_url_portfolio"
-    And User take screenshot with file name "2.projectPage_homePage"
+    # And User take screenshot with file name "2.projectPage_homePage"
     When User click "navbar:navProjectIcon"
     Then Currently opened website URL is equal with "testData:testData_projectPageUrl"
     Then Title currently opened website is equal with "testData:testData_projectTitle"
