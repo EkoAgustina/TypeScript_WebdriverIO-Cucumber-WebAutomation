@@ -1,8 +1,8 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
-import { baseOpenBrowser, takeScreenshot, pageLoad, sleep, actionEnter } from '../../helpers/baseScreen.ts';
+import { baseOpenBrowser, takeScreenshot, pageLoad, sleep, actionEnter, findElement } from '../../helpers/baseScreen.ts';
 import { actionClick } from '../../helpers/baseClick.ts';
 import { elementDisplayed, equalData, titleEqual, urlEqual } from '../../helpers/baseExpect.ts';
-import { swipeUpwithTime } from "../../helpers/baseSwipe.ts";
+import { swipeUpElDisplayed, swipeUpwithTime } from "../../helpers/baseSwipe.ts";
 import { actionFill } from '../../helpers/baseFill.ts';
 
 /**
@@ -111,6 +111,35 @@ Then(/^User fill "(.*)" with data "(.*)"$/, async (locator, test_data) => {
 Then(/^User press enter$/, async () => {
     await actionEnter();
     sleep(1);
+});
+
+Given(/^User cekk$/, async () => {
+    // Open browser
+    await baseOpenBrowser("https://www.google.com");
+    await pageLoad(5);
+
+    // 
+    await actionFill("google:google_main_search_field","testData:testData_validWebTitle")
+    await actionEnter();
+    sleep(1);
+
+    //
+    if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())){
+        await swipeUpElDisplayed("google:google_url_portfolio")
+        await swipeUpElDisplayed("google:google_search_index_two")
+        await actionClick("google:google_search_index_two");
+        await swipeUpElDisplayed("google:google_url_portfolio")
+        if (await ((await findElement("google:google_url_portfolio")).isDisplayed())){
+            await actionClick("google:google_url_portfolio");
+        }
+    }
+    else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())){
+        await actionClick("google:google_url_portfolio");
+    }
+
+    await takeScreenshot("cekk");
+
+
 });
 
 

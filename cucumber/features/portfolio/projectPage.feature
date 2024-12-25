@@ -3,7 +3,7 @@ Feature: Portfolio - Project Page
 @portfolio @projectPage @projectPage_googleSearchEngine
 Scenario: Verify user successfully redirects to Project page when clicking Project on navbar on Home page via google search engine
     Given User open "https://www.google.com"
-    And User fill "google:google_main_search_field" with data "testData:testData_validWebTitle"
+    And User fill "google:google_main_search_field" with data "testData:portfolio_google_search_second"
     And User press enter
     And User take screenshot with file name "1.GoogleSearchEngine"
     And User click "google:google_url_portfolio"
@@ -35,7 +35,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
 @portfolio @projectPage @projectPage_googleSearchEngine_two
 Scenario: Verify user successfully redirects to Project page when clicking Project on navbar on Home page via google search engine - two
     Given User open "https://www.google.com"
-    And User fill "google:google_main_search_field" with data "testData:testData_validWebTitle"
+    And User fill "google:google_main_search_field" with data "testData:portfolio_google_search_second"
     And User press enter
     And User take screenshot with file name "1.GoogleSearchEngine"
     And User click "google:google_url_portfolio"
@@ -60,7 +60,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
 @portfolio @projectPage @projectPage_googleSearchEngine_three
 Scenario: Verify user successfully redirects to Project page when clicking Project on navbar on Home page via google search engine - three
     Given User open "https://www.google.com"
-    And User fill "google:google_main_search_field" with data "testData:testData_validWebTitle"
+    And User fill "google:google_main_search_field" with data "testData:portfolio_google_search_second"
     And User press enter
     And User take screenshot with file name "1.GoogleSearchEngine"
     And User click "google:google_url_portfolio"
@@ -85,7 +85,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
 @portfolio @projectPage @projectPage_googleSearchEngine_four
 Scenario: Verify user successfully redirects to Project page when clicking Project on navbar on Home page via google search engine - four
     Given User open "https://www.google.com"
-    And User fill "google:google_main_search_field" with data "testData:testData_validWebTitle"
+    And User fill "google:google_main_search_field" with data "testData:portfolio_google_search_second"
     And User press enter
     And User take screenshot with file name "1.GoogleSearchEngine"
     And User click "google:google_url_portfolio"
@@ -110,7 +110,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
 @portfolio @projectPage @projectPage_googleSearchEngine_five
 Scenario: Verify user successfully redirects to Project page when clicking Project on navbar on Home page via google search engine - five
     Given User open "https://www.google.com"
-    And User fill "google:google_main_search_field" with data "testData:testData_validWebTitle"
+    And User fill "google:google_main_search_field" with data "testData:portfolio_google_search_second"
     And User press enter
     And User take screenshot with file name "1.GoogleSearchEngine"
     And User click "google:google_url_portfolio"

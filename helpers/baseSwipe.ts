@@ -1,6 +1,6 @@
 import {sleep} from "./baseScreen.ts"
 import { browser} from '@wdio/globals'
-
+import { findElement } from "./baseScreen.ts"
 
 
 /**
@@ -10,15 +10,21 @@ import { browser} from '@wdio/globals'
  */
 async function swipeUpElDisplayed (locator:string) {
     const windowSize = await browser.getWindowSize();
-    const coordinateX = windowSize.width * 0.5
-    const coordinateY = windowSize.height * 0.5
+    const coordinateX = windowSize.width * 0.1
+    const coordinateY = windowSize.height * 0.25
+    let i = 0;
     // const endCoordinate = windowSize.height * 0.25
     console.log(locator)
-    await browser.scroll(coordinateX,coordinateY)
-  
-    // while (!await (await FindElement(locator)).isDisplayed()) {
     // await browser.scroll(coordinateX,coordinateY)
-    // }
+  
+    while (!await (await findElement(locator)).isDisplayed() ) {
+        await browser.scroll(coordinateX,coordinateY)
+        console.log(i)
+        if (i == 8) {
+            break;
+        }
+        i++
+    }
 }
 
 /**
