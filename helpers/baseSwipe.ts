@@ -10,17 +10,14 @@ import { findElement } from "./baseScreen.ts"
  */
 async function swipeUpElDisplayed (locator:string) {
     const windowSize = await browser.getWindowSize();
-    const coordinateX = windowSize.width * 0.1
-    const coordinateY = windowSize.height * 0.25
+    const coordinateX = Math.round(windowSize.width * 0.2) 
+    const coordinateY = Math.round(windowSize.height * 0.70)
     let i = 0;
-    // const endCoordinate = windowSize.height * 0.25
-    console.log(locator)
-    // await browser.scroll(coordinateX,coordinateY)
   
     while (!await (await findElement(locator)).isDisplayed() ) {
         await browser.scroll(coordinateX,coordinateY)
         console.log(i)
-        if (i == 8) {
+        if (i == 3) {
             break;
         }
         i++
@@ -33,8 +30,8 @@ async function swipeUpElDisplayed (locator:string) {
  */
 async function swipeUpwithTime (duration:number) {
     const windowSize = await browser.getWindowSize();
-    const coordinateX = windowSize.width * 0.1
-    const coordinateY = windowSize.height * 0.25
+    const coordinateX = Math.round (windowSize.width * 0.1)
+    const coordinateY = Math.round(windowSize.height * 0.25)
 
     for (let i = 0; i < duration; i++) {
         await browser.scroll(coordinateX, coordinateY);

@@ -60,20 +60,15 @@ async function customGeolocation(customLatitude:any, customLongitude:any) {
 }
 
 /**
- * Opens the browser and navigates to the specified URL.
- * @param {string} url - The URL to navigate to.
- * @returns {Promise<void>} A promise that resolves when the browser is opened and the URL is loaded.
+ * For set browser size.
  */
-async function baseOpenBrowser(url: string): Promise<void> {
-  const browserName = env.browserName;
-  await browser.url(url);
-
+async function setBrowserSize() {
   if (globalVariables.os === 'linux') {
-      await browser.setWindowSize(1470, 860);
+    await browser.fullscreenWindow();
   } else {
-      switch (browserName) {
+      switch (env.browserName) {
           case 'headless':
-              await browser.setWindowSize(1470, 920);
+              await browser.fullscreenWindow();
               break;
           case 'chrome':
               await browser.fullscreenWindow();
@@ -82,6 +77,17 @@ async function baseOpenBrowser(url: string): Promise<void> {
               throw new Error('Unknown condition!');
       }
   }
+  
+}
+
+/**
+ * Opens the browser and navigates to the specified URL.
+ * @param {string} url - The URL to navigate to.
+ * @returns {Promise<void>} A promise that resolves when the browser is opened and the URL is loaded.
+ */
+async function baseOpenBrowser(url: string): Promise<void> {
+  await browser.url(url);
+  await setBrowserSize()
 
   const windowSizeString = `Width: ${(await browser.getWindowSize()).width}, Height: ${(await browser.getWindowSize()).height}`;
   log('INFO', windowSizeString);
@@ -202,4 +208,4 @@ async function actionEnter(): Promise<void> {
 
 }
 
-export {baseOpenBrowser, findElement, takeScreenshot, sleep, pageLoad, stdoutAnsiColor, getCurrentDate, cleanDirectory, log, customGeolocation, actionEnter}
+export {baseOpenBrowser, findElement, takeScreenshot, sleep, pageLoad, stdoutAnsiColor, getCurrentDate, cleanDirectory, log, customGeolocation, actionEnter, setBrowserSize}

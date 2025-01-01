@@ -1,5 +1,5 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
-import { baseOpenBrowser, takeScreenshot, pageLoad, sleep, actionEnter, findElement } from '../../helpers/baseScreen.ts';
+import { baseOpenBrowser, takeScreenshot, pageLoad, sleep, actionEnter, findElement, setBrowserSize } from '../../helpers/baseScreen.ts';
 import { actionClick } from '../../helpers/baseClick.ts';
 import { elementDisplayed, equalData, titleEqual, urlEqual } from '../../helpers/baseExpect.ts';
 import { swipeUpElDisplayed, swipeUpwithTime } from "../../helpers/baseSwipe.ts";
@@ -113,7 +113,7 @@ Then(/^User press enter$/, async () => {
     sleep(1);
 });
 
-Given(/^User cekk$/, async () => {
+Given(/^Users access web portfolios on Google search engine$/, async () => {
     // Open browser
     await baseOpenBrowser("https://www.google.com");
     await pageLoad(5);
@@ -123,22 +123,50 @@ Given(/^User cekk$/, async () => {
     await actionEnter();
     sleep(1);
 
+    await setBrowserSize()
+
     //
     if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())){
+        // Cek index 10
         await swipeUpElDisplayed("google:google_url_portfolio")
-        await swipeUpElDisplayed("google:google_search_index_two")
-        await actionClick("google:google_search_index_two");
-        await swipeUpElDisplayed("google:google_url_portfolio")
-        if (await ((await findElement("google:google_url_portfolio")).isDisplayed())){
+        await swipeUpElDisplayed("google:google_search_index_ten")
+        await actionClick("google:google_search_index_ten");
+
+        //cek index 11
+        if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())){
+            await setBrowserSize()
+
+            await swipeUpElDisplayed("google:google_url_portfolio")
+            await swipeUpElDisplayed("google:google_search_index_eleven")
+            await actionClick("google:google_search_index_eleven");
+
+            //cek index 12
+            if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+                await setBrowserSize()
+
+                await swipeUpElDisplayed("google:google_url_portfolio")
+                await swipeUpElDisplayed("google:google_search_index_twelve")
+                await actionClick("google:google_search_index_twelve");
+
+                await setBrowserSize()
+
+                await swipeUpElDisplayed("google:google_url_portfolio")
+                await actionClick("google:google_url_portfolio");
+            }
+        }
+        else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
             await actionClick("google:google_url_portfolio");
         }
+
     }
     else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())){
         await actionClick("google:google_url_portfolio");
     }
 
-    await takeScreenshot("cekk");
+    await setBrowserSize()
 
+
+    sleep(3);
 
 });
 

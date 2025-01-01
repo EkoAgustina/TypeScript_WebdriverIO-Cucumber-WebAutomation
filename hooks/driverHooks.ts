@@ -1,4 +1,4 @@
-import { pageLoad, sleep, takeScreenshot, log } from "../helpers/baseScreen.ts";
+import { pageLoad, sleep, takeScreenshot, log, setBrowserSize } from "../helpers/baseScreen.ts";
 import globalVariables from "../resources/globalVariable.ts";
 import PropertiesReader from 'properties-reader';
 import { env } from 'process';
@@ -61,21 +61,7 @@ async function hookAfterStep(scenario: { name: string }, step: { text: string },
     windowSizeString_after = `Width: ${(await browser.getWindowSize()).width}, Height: ${(await browser.getWindowSize()).height}`;
 
     if (windowSizeString_before != windowSizeString_after) {
-      const browserName = env.browserName;
-      if (globalVariables.os === 'linux') {
-        await browser.setWindowSize(1470, 860);
-      } else {
-        switch (browserName) {
-          case 'headless':
-            await browser.setWindowSize(1470, 920);
-            break;
-          case 'chrome':
-            await browser.fullscreenWindow();
-            break;
-          default:
-            throw new Error('Unknown condition!');
-        }
-      }
+      await setBrowserSize()
     }
     sleep(1);
   }
