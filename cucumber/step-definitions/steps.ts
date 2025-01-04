@@ -221,6 +221,7 @@ Given(/^Users access web portfolios on Google search engine$/, async () => {
         }
 
         await setBrowserSize()
+        await pageLoad(5);
 
 
         sleep(1);
