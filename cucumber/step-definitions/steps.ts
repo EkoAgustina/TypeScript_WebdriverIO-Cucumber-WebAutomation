@@ -1,8 +1,8 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
-import { baseOpenBrowser, takeScreenshot, pageLoad, sleep, actionEnter, findElement, setBrowserSize } from '../../helpers/baseScreen.ts';
+import { baseOpenBrowser, takeScreenshot, pageLoad, sleep, actionEnter, setBrowserSize, findElement, log } from '../../helpers/baseScreen.ts';
 import { actionClick } from '../../helpers/baseClick.ts';
 import { elementDisplayed, equalData, titleEqual, urlEqual } from '../../helpers/baseExpect.ts';
-import { swipeUpElDisplayed, swipeUpwithTime } from "../../helpers/baseSwipe.ts";
+import {  swipeUpwithTime } from "../../helpers/baseSwipe.ts";
 import { actionFill } from '../../helpers/baseFill.ts';
 
 /**
@@ -12,8 +12,13 @@ import { actionFill } from '../../helpers/baseFill.ts';
  * @returns {Promise<void>} - A Promise that resolves after the page is opened.
  */
 Given(/^User open "(.*)"$/, async (page: string) => {
-    await baseOpenBrowser(page);
-    await pageLoad(5);
+    try {
+        await baseOpenBrowser(page);
+        await pageLoad(5);
+    } catch (err: any) {
+        log("ERROR", err.message)
+        throw err
+    }
 });
 
 /**
@@ -23,7 +28,12 @@ Given(/^User open "(.*)"$/, async (page: string) => {
  * @returns {Promise<void>} - A Promise that resolves after the click action is performed.
  */
 When(/^User click "(.*)"$/, async (locator) => {
-    await actionClick(locator);
+    try {
+        await actionClick(locator);
+    } catch (err: any) {
+        log("ERROR", err.message)
+        throw err
+    }
 });
 
 /**
@@ -34,7 +44,12 @@ When(/^User click "(.*)"$/, async (locator) => {
  * @returns {Promise<void>} - A Promise that resolves after checking the element's visibility.
  */
 Then(/^Element "(.*)" (is displayed|not displayed)$/, async (locator, condition) => {
-    await elementDisplayed(locator, condition);
+    try {
+        await elementDisplayed(locator, condition);
+    } catch (err: any) {
+        log("ERROR", err.message)
+        throw err
+    }
 });
 
 /**
@@ -46,7 +61,12 @@ Then(/^Element "(.*)" (is displayed|not displayed)$/, async (locator, condition)
  * @returns {Promise<void>} - A Promise that resolves after the comparison is done.
  */
 Then(/^Element "(.*)" is (equal|not equal) with data "(.*)"$/, async (locator, condition, testData) => {
-    await equalData(condition, locator, testData);
+    try {
+        await equalData(condition, locator, testData);
+    } catch (err: any) {
+        log("ERROR", err.message)
+        throw err
+    }
 });
 
 /**
@@ -56,8 +76,13 @@ Then(/^Element "(.*)" is (equal|not equal) with data "(.*)"$/, async (locator, c
  * @returns {Promise<void>} - A Promise that resolves after the element is found or if it's already displayed.
  */
 When(/^User swipe up until he finds element "(.*)"$/, async (locator) => {
-    console.log(locator);
-    await swipeUpwithTime(1);
+    try {
+        log("INFO", locator)
+        await swipeUpwithTime(1);
+    } catch (err: any) {
+        log("ERROR", err.message)
+        throw err
+    }
 });
 
 /**
@@ -66,7 +91,12 @@ When(/^User swipe up until he finds element "(.*)"$/, async (locator) => {
  * @param {number} duration - The duration of the swipe action, specified in seconds.
  */
 When(/^User swipe up until (.*) seconds$/, async (duration: number) => {
-    await swipeUpwithTime(duration);
+    try {
+        await swipeUpwithTime(duration);
+    } catch (err: any) {
+        log("ERROR", err.message)
+        throw err
+    }
 });
 
 /**
@@ -75,7 +105,12 @@ When(/^User swipe up until (.*) seconds$/, async (duration: number) => {
  * @param {string} testData - The expected title to be compared with the title of the currently opened website.
  */
 Then(/^Title currently opened website is (equal|not equal) with "(.*)"$/, async (condition, testData) => {
-    await titleEqual(condition, testData);
+    try {
+        await titleEqual(condition, testData);
+    } catch (err: any) {
+        log("ERROR", err.message)
+        throw err
+    }
 });
 
 /**
@@ -84,7 +119,12 @@ Then(/^Title currently opened website is (equal|not equal) with "(.*)"$/, async 
  * @param {string} testData - The expected URL to be compared with the URL of the currently opened website.
  */
 Then(/^Currently opened website URL is (equal|not equal) with "(.*)"$/, async (condition, testData) => {
-    await urlEqual(condition, testData);
+    try {
+        await urlEqual(condition, testData);
+    } catch (err: any) {
+        log("ERROR", err.message)
+        throw err
+    }
 });
 
 /**
@@ -92,7 +132,12 @@ Then(/^Currently opened website URL is (equal|not equal) with "(.*)"$/, async (c
  * @param {string} name - The file name for the screenshot.
  */
 Then(/^User take screenshot with file name "(.*)"$/, async (name) => {
-    await takeScreenshot(name);
+    try {
+        await takeScreenshot(name);
+    } catch (err: any) {
+        log("ERROR", err.message)
+        throw err
+    }
 });
 
 /**
@@ -101,7 +146,12 @@ Then(/^User take screenshot with file name "(.*)"$/, async (name) => {
  * @param {string} test_data - The data to fill into the input element.
  */
 Then(/^User fill "(.*)" with data "(.*)"$/, async (locator, test_data) => {
-    await actionFill(locator,test_data);
+    try {
+        await actionFill(locator,test_data);
+    } catch (err: any) {
+        log("ERROR", err.message)
+        throw err
+    }
 });
 
 /**
@@ -109,48 +159,60 @@ Then(/^User fill "(.*)" with data "(.*)"$/, async (locator, test_data) => {
  * This step also includes a sleep for 3 seconds after the key press.
  */
 Then(/^User press enter$/, async () => {
-    await actionEnter();
-    sleep(1);
+    try {
+        await actionEnter();
+        sleep(1);
+    } catch (err: any) {
+        log("ERROR", err.message)
+        throw err
+    }
 });
 
 Given(/^Users access web portfolios on Google search engine$/, async () => {
-    // Open browser
-    await baseOpenBrowser("https://www.google.com");
-    await pageLoad(5);
 
-    // 
-    await actionFill("google:google_main_search_field","testData:testData_validWebTitle")
-    await actionEnter();
-    sleep(1);
+    try {
+        // Open browser
+        await baseOpenBrowser("https://www.google.com");
+        await pageLoad(5);
 
-    await setBrowserSize()
+        // 
+        await actionFill("google:google_main_search_field","testData:testData_validWebTitle")
+        await actionEnter();
+        sleep(1);
 
-    //
-    if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())){
-        // Cek index 10
-        await swipeUpElDisplayed("google:google_url_portfolio")
-        await swipeUpElDisplayed("google:google_search_index_ten")
-        await actionClick("google:google_search_index_ten");
+        await setBrowserSize()
 
-        //cek index 11
         if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())){
+            // Cek index 10
+            await actionClick("google:google_search_index_ten");
             await setBrowserSize()
 
-            await swipeUpElDisplayed("google:google_url_portfolio")
-            await swipeUpElDisplayed("google:google_search_index_eleven")
-            await actionClick("google:google_search_index_eleven");
-
-            //cek index 12
             if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+                // Cek index 11
+                await actionClick("google:google_search_index_eleven");
                 await setBrowserSize()
 
-                await swipeUpElDisplayed("google:google_url_portfolio")
-                await swipeUpElDisplayed("google:google_search_index_twelve")
-                await actionClick("google:google_search_index_twelve");
+                if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+                    // Cek index 12
+                    await actionClick("google:google_search_index_twelve");
+                    await setBrowserSize()
 
-                await setBrowserSize()
+                    if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+                        await takeScreenshot("Google_search_engine")
+                        await actionClick("google:google_url_portfolio");
+                    }
+                    else if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+                        throw new Error("https://ekoagustina.my.id not found on google search engine")
+                    }
+                }
+                else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+                    await takeScreenshot("Google_search_engine")
+                    await actionClick("google:google_url_portfolio");
+                }
 
-                await swipeUpElDisplayed("google:google_url_portfolio")
+            }
+            else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+                await takeScreenshot("Google_search_engine")
                 await actionClick("google:google_url_portfolio");
             }
         }
@@ -158,15 +220,14 @@ Given(/^Users access web portfolios on Google search engine$/, async () => {
             await actionClick("google:google_url_portfolio");
         }
 
+        await setBrowserSize()
+
+
+        sleep(1);
+    } catch (err: any) {
+        log("ERROR", err.message)
+        throw err
     }
-    else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())){
-        await actionClick("google:google_url_portfolio");
-    }
-
-    await setBrowserSize()
-
-
-    sleep(3);
 
 });
 

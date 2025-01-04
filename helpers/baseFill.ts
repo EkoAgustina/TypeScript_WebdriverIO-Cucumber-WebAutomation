@@ -1,4 +1,4 @@
-import {findElement} from "./baseScreen.ts"
+import {findElement, log} from "./baseScreen.ts"
 import { parseTestData } from "../mappings/mapper.ts"
 
 /**
@@ -8,7 +8,12 @@ import { parseTestData } from "../mappings/mapper.ts"
  * @returns {Promise<void>} A promise that resolves when the fill action is completed.
  */
 async function actionFill(locator: string, test_data: string): Promise<void> {
-    await (await findElement(locator)).setValue(parseTestData(test_data));
+    try {
+        await (await findElement(locator)).setValue(parseTestData(test_data));
+    } catch (err:any) {
+        log("ERROR", err.message)
+        throw err
+    }
 }
 
 export {actionFill}

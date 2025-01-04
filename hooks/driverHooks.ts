@@ -78,9 +78,9 @@ async function hooksAfterScenario(world: any, result: any): Promise<void> {
   const propertiesPath = globalVariables.allureProperties;
   const properties = PropertiesReader(propertiesPath);
   const allureHostUrl = () => {
-    if (env.hostName === 'localhost:8080') {
+    if (env.HOST_NAME === 'localhost:8080') {
       return 'localhost:8080'
-    } else if (env.hostName === 'localhost:4444') {
+    } else {
       return 'selenium/standalone-chrome'
     }
   }

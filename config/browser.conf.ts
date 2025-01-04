@@ -5,8 +5,8 @@ import { config } from "./wdio.conf.ts"
 import { env } from 'process';
 
 if (globalVariables.os === 'linux') {
-    config.hostname = env.hostName!.split(':')[0];
-    config.port = parseInt(env.hostName!.split(':')[1]);
+    config.hostname = env.HOST_NAME!.split(':')[0];
+    config.port = parseInt(env.HOST_NAME!.split(':')[1]);
     config.capabilities = [
         {
             maxInstances: 6,
@@ -20,7 +20,7 @@ if (globalVariables.os === 'linux') {
     ];
     config.services = [];
 } else {
-    const browserName = env.browserName;
+    const browserName = env.BROWSER_NAME;
     switch (browserName) {
         case 'headless':
             config.capabilities = [
@@ -48,9 +48,26 @@ if (globalVariables.os === 'linux') {
                 }
             ];
             break;
+        case 'docker':
+            config.hostname = env.HOST_NAME!.split(':')[0];
+            config.port = parseInt(env.HOST_NAME!.split(':')[1]);
+            config.capabilities = [
+                {
+                    maxInstances: 6,
+                    browserName: 'chrome',
+                    'goog:chromeOptions': {
+                        args: ['--headless', '--no-sandbox', '--disable-gpu', 'disable-dev-shm-usage', '--disable-cache', `--user-agent=${env.CUSTOM_USER_AGENT_CHROME_HEADLESS}`]
+                    },
+                    acceptInsecureCerts: true,
+                    // webSocketUrl: true
+                }
+            ];
+            config.services = [];
+            break;
         default:
-            throw new Error(`Condition ${browserName}, condition not recognized!`);
+            throw new Error(`browserName "${browserName}" not recognized!`);
     }
+
 }
 
 config.before = async () => {
@@ -61,8 +78,6 @@ config.before = async () => {
 
 config.after = async () => {
     const response = await axios.get('https://ipinfo.io/json');
-    console.log(`------Current IP------`);
     console.log(response.data)
-    console.log(`------Current IP------`);
 }
 export default { config };

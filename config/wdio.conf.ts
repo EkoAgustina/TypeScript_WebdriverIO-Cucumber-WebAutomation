@@ -162,7 +162,7 @@ export const config: Options.Testrunner = {
         // <boolean> fail if there are any undefined or pending steps
         strict: false,
         // <string> (expression) only execute the features or scenarios with tags matching the expression
-        tagExpression: env.cucumberTagExpression,
+        tagExpression: env.CUCUMBER_TAGS_EXPRESSION,
         // <number> timeout for step definitions
         timeout: 250000,
         // <boolean> Enable this config to treat undefined definitions as warnings.

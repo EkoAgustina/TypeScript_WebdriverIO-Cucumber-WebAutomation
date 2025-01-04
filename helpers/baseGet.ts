@@ -1,4 +1,4 @@
-import { findElement } from "./baseScreen.ts";
+import { findElement, log } from "./baseScreen.ts";
 import { keyElement } from "../mappings/mapper.ts"
 
 
@@ -9,14 +9,19 @@ import { keyElement } from "../mappings/mapper.ts"
  * @throws {Error} If the text content is empty or null.
  */
 async function actionGetText (locator:string): Promise<string> {
+  try {
     const textValue = await (await findElement(locator)).getText()
   
     if (textValue === '' || textValue === null) {
       throw new Error(`Cannot get text on element '${keyElement(locator)}'`);
     } else {
-      console.log('Its value: ', textValue);
+      log("INFO", textValue)
       return textValue;
     }
+  } catch (err:any) {
+    log("ERROR", err.message)
+    throw err
+  }
 }
   
   export { actionGetText };

@@ -4,8 +4,6 @@ import logger from '@wdio/logger';
 import * as fs from 'node:fs/promises';
 import { existsSync, readdirSync, mkdirSync } from 'node:fs';
 import { keyElement } from "../mappings/mapper.ts";
-import globalVariables from "../resources/globalVariable.ts"
-import { env } from 'process';
 // import { Key } from 'webdriverio'
 // import cucumberJson from 'wdio-cucumberjs-json-reporter';
 
@@ -51,33 +49,28 @@ async function customGeolocation(customLatitude:any, customLongitude:any) {
 //     longitude: customLongitude,
 //     accuracy: 100
 // })
-
+try {
   await browser.sendCommand('Emulation.setGeolocationOverride', {
     latitude: customLatitude,
     longitude: customLongitude,
     accuracy: 100
 });
+} catch (err:any) {
+  log("ERROR", err.message)
+  throw err
+}
 }
 
 /**
  * For set browser size.
  */
 async function setBrowserSize() {
-  if (globalVariables.os === 'linux') {
+  try {
     await browser.fullscreenWindow();
-  } else {
-      switch (env.browserName) {
-          case 'headless':
-              await browser.fullscreenWindow();
-              break;
-          case 'chrome':
-              await browser.fullscreenWindow();
-              break;
-          default:
-              throw new Error('Unknown condition!');
-      }
+  } catch (err: any) {
+    log("ERROR", err.message)
+    throw err
   }
-  
 }
 
 /**
@@ -86,12 +79,26 @@ async function setBrowserSize() {
  * @returns {Promise<void>} A promise that resolves when the browser is opened and the URL is loaded.
  */
 async function baseOpenBrowser(url: string): Promise<void> {
-  await browser.url(url);
-  await setBrowserSize()
+  try {
+    await browser.url(url);
+    await setBrowserSize()
 
-  const windowSizeString = `Width: ${(await browser.getWindowSize()).width}, Height: ${(await browser.getWindowSize()).height}`;
-  log('INFO', windowSizeString);
-  await browser.pause(1000);
+    log('INFO', `Width: ${(await browser.getWindowSize()).width}, Height: ${(await browser.getWindowSize()).height}`);
+    await browser.pause(1000);
+  } catch (err:any) {
+    log("ERROR", err.message)
+    throw err
+  }
+}
+
+async function scrollIntoView(locator: string) {
+  try {
+    await (await $(keyElement(locator))).scrollIntoView()
+    await scrollIntoView(locator)
+  } catch (err:any) {
+    log("ERROR", err.message)
+    throw err
+  }
 }
 
 /**
@@ -121,6 +128,8 @@ const findElement = async (locator: string): Promise<WebdriverIO.Element> => {
       $(keyElement(locator))
     ])
       .then((element) => {
+        log("INFO", keyElement(locator))
+        sleep(1)
         resolve(element[1])
       })
       .catch((err) => {
@@ -135,10 +144,15 @@ const findElement = async (locator: string): Promise<WebdriverIO.Element> => {
  * @throws {Error} If the page fails to load within the specified duration.
  */
 async function pageLoad (duration:number) {
+  try {
     await browser.waitUntil(() => browser.execute(() => document.readyState === 'complete'), {
       timeout: duration * 1000,
       timeoutMsg: 'Page failed to load'
     });
+  } catch (err:any) {
+    log("ERROR", err.message)
+    throw err
+  }
 }
 
 /**
@@ -151,7 +165,13 @@ async function takeScreenshot (name:string) {
   if (existsSync(checkDirectories) === false) {
     mkdirSync(checkDirectories)
   }
-  await browser.saveScreenshot('./screenshot/' + name + '.png');
+  try {
+    await pageLoad(5)
+    await browser.saveScreenshot('./screenshot/' + name + '.png');
+  } catch (err:any) {
+    log("ERROR", err.message)
+    throw err
+  }
     // cucumberJson.attach(await browser.takeScreenshot(), 'image/png');
 }
 
@@ -193,7 +213,7 @@ function cleanDirectory (directoryPath:string) {
           fs.rm(filePath, { recursive: true });
         }
       } else {
-        console.log(stdoutAnsiColor('red', `Warning: your path report "${directoryPath[i]}" does not exist!`));
+        log("WARNING", `Warning: your path report "${directoryPath[i]}" does not exist!`)
       }
     }
 }
@@ -203,9 +223,12 @@ function cleanDirectory (directoryPath:string) {
  * @returns {Promise<void>} A promise that resolves when the key action is completed.
  */
 async function actionEnter(): Promise<void> {
-  // const browserName = env.browserName;
-  await browser.keys('Enter')
-
+  try {
+    await browser.keys('Enter')
+  } catch (err:any) {
+    log("ERROR", err.message)
+    throw err
+  }
 }
 
-export {baseOpenBrowser, findElement, takeScreenshot, sleep, pageLoad, stdoutAnsiColor, getCurrentDate, cleanDirectory, log, customGeolocation, actionEnter, setBrowserSize}
+export {baseOpenBrowser, findElement, takeScreenshot, sleep, pageLoad, stdoutAnsiColor, scrollIntoView, getCurrentDate, cleanDirectory, log, customGeolocation, actionEnter, setBrowserSize}
