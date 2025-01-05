@@ -1,5 +1,5 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
-import { baseOpenBrowser, takeScreenshot, pageLoad, sleep, actionEnter, setBrowserSize, findElement, log } from '../../helpers/baseScreen.ts';
+import { baseOpenBrowser, takeScreenshot, pageLoad, sleep, actionEnter, setBrowserSize, log } from '../../helpers/baseScreen.ts';
 import { actionClick } from '../../helpers/baseClick.ts';
 import { elementDisplayed, equalData, titleEqual, urlEqual } from '../../helpers/baseExpect.ts';
 import {  swipeUpwithTime } from "../../helpers/baseSwipe.ts";
@@ -172,56 +172,56 @@ Given(/^Users access web portfolios on Google search engine$/, async () => {
 
     try {
         // Open browser
-        await baseOpenBrowser("https://www.google.com");
+        await baseOpenBrowser("https://ekoagustina.my.id");
         await pageLoad(5);
 
         // 
-        await actionFill("google:google_main_search_field","testData:testData_validWebTitle")
-        await actionEnter();
-        sleep(1);
+        // await actionFill("google:google_main_search_field","testData:testData_validWebTitle")
+        // await actionEnter();
+        // sleep(1);
+
+        // await setBrowserSize()
+
+        // if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())){
+        //     // Cek index 10
+        //     await actionClick("google:google_search_index_ten");
+        //     await setBrowserSize()
+
+        //     if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+        //         // Cek index 11
+        //         await actionClick("google:google_search_index_eleven");
+        //         await setBrowserSize()
+
+        //         if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+        //             // Cek index 12
+        //             await actionClick("google:google_search_index_twelve");
+        //             await setBrowserSize()
+
+        //             if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+        //                 await takeScreenshot("Google_search_engine")
+        //                 await actionClick("google:google_url_portfolio");
+        //             }
+        //             else if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+        //                 throw new Error("https://ekoagustina.my.id not found on google search engine")
+        //             }
+        //         }
+        //         else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+        //             await takeScreenshot("Google_search_engine")
+        //             await actionClick("google:google_url_portfolio");
+        //         }
+
+        //     }
+        //     else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+        //         await takeScreenshot("Google_search_engine")
+        //         await actionClick("google:google_url_portfolio");
+        //     }
+        // }
+        // else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+        //     await actionClick("google:google_url_portfolio");
+        // }
 
         await setBrowserSize()
-
-        if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())){
-            // Cek index 10
-            await actionClick("google:google_search_index_ten");
-            await setBrowserSize()
-
-            if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                // Cek index 11
-                await actionClick("google:google_search_index_eleven");
-                await setBrowserSize()
-
-                if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                    // Cek index 12
-                    await actionClick("google:google_search_index_twelve");
-                    await setBrowserSize()
-
-                    if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                        await takeScreenshot("Google_search_engine")
-                        await actionClick("google:google_url_portfolio");
-                    }
-                    else if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                        throw new Error("https://ekoagustina.my.id not found on google search engine")
-                    }
-                }
-                else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                    await takeScreenshot("Google_search_engine")
-                    await actionClick("google:google_url_portfolio");
-                }
-
-            }
-            else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                await takeScreenshot("Google_search_engine")
-                await actionClick("google:google_url_portfolio");
-            }
-        }
-        else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-            await actionClick("google:google_url_portfolio");
-        }
-
-        await setBrowserSize()
-        await pageLoad(5);
+        // await pageLoad(5);
 
 
         sleep(1);
