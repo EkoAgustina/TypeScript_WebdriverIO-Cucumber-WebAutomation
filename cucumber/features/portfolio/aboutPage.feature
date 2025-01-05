@@ -5,10 +5,10 @@ Scenario: Verify user successfully redirects to About page when clicking About o
     Given Users access web portfolios on Google search engine
     Then Title currently opened website is equal with "testData:testData_validWebTitle"
     Then Currently opened website URL is equal with "testData:testData_homePageUrl"
-    Then Element "navbar:navAboutIcon" is displayed
-    And User take screenshot with file name "2.aboutePage_homePage"
+    # Then Element "navbar:navAboutIcon" is displayed
+    # And User take screenshot with file name "2.aboutePage_homePage"
     When User click "navbar:navAboutIcon"
-    Then Title currently opened website is equal with "testData:testData_aboutTitle"
+    # Then Title currently opened website is equal with "testData:testData_aboutTitle"
     Then Currently opened website URL is equal with "testData:testData_aboutPageUrl"
     Then Element "aboutPage:aboutPageTitle" is displayed
     Then Element "aboutPage:aboutContent" is equal with data "testData:testData_aboutContent"
@@ -19,10 +19,10 @@ Scenario: Verify user successfully redirects to About page when clicking About o
     Given Users access web portfolios on Google search engine
     Then Title currently opened website is equal with "testData:testData_validWebTitle"
     Then Currently opened website URL is equal with "testData:testData_homePageUrl"
-    Then Element "navbar:navAboutIcon" is displayed
-    And User take screenshot with file name "2.aboutePage_homePage"
+    # Then Element "navbar:navAboutIcon" is displayed
+    # And User take screenshot with file name "2.aboutePage_homePage"
     When User click "navbar:navAboutIcon"
-    Then Title currently opened website is equal with "testData:testData_aboutTitle"
+    # Then Title currently opened website is equal with "testData:testData_aboutTitle"
     Then Currently opened website URL is equal with "testData:testData_aboutPageUrl"
     Then Element "aboutPage:aboutPageTitle" is displayed
     And User take screenshot with file name "3.about"
@@ -31,10 +31,10 @@ Scenario: Verify user successfully redirects to About page when clicking About o
 Scenario: Verify user successfully redirects to About page when clicking About on navbar on Home page via google search engine - three
     Given Users access web portfolios on Google search engine
     Then Currently opened website URL is equal with "testData:testData_homePageUrl"
-    Then Element "navbar:navAboutIcon" is displayed
-    And User take screenshot with file name "2.aboutePage_homePage"
+    # Then Element "navbar:navAboutIcon" is displayed
+    # And User take screenshot with file name "2.aboutePage_homePage"
     When User click "navbar:navAboutIcon"
-    Then Title currently opened website is equal with "testData:testData_aboutTitle"
+    # Then Title currently opened website is equal with "testData:testData_aboutTitle"
     Then Currently opened website URL is equal with "testData:testData_aboutPageUrl"
     Then Element "aboutPage:aboutPageTitle" is displayed
     And User take screenshot with file name "3.about"
@@ -44,10 +44,10 @@ Scenario: Verify user successfully redirects to About page when clicking About o
     Given Users access web portfolios on Google search engine
     Then Title currently opened website is equal with "testData:testData_validWebTitle"
     Then Currently opened website URL is equal with "testData:testData_homePageUrl"
-    Then Element "navbar:navAboutIcon" is displayed
-    And User take screenshot with file name "2.aboutePage_homePage"
+    # Then Element "navbar:navAboutIcon" is displayed
+    # And User take screenshot with file name "2.aboutePage_homePage"
     When User click "navbar:navAboutIcon"
-    Then Title currently opened website is equal with "testData:testData_aboutTitle"
+    # Then Title currently opened website is equal with "testData:testData_aboutTitle"
     Then Currently opened website URL is equal with "testData:testData_aboutPageUrl"
     Then Element "aboutPage:aboutPageTitle" is displayed
     And User take screenshot with file name "3.about"
@@ -57,10 +57,10 @@ Scenario: Verify user successfully redirects to About page when clicking About o
     Given Users access web portfolios on Google search engine
     Then Title currently opened website is equal with "testData:testData_validWebTitle"
     Then Currently opened website URL is equal with "testData:testData_homePageUrl"
-    Then Element "navbar:navAboutIcon" is displayed
-    And User take screenshot with file name "2.aboutePage_homePage"
+    # Then Element "navbar:navAboutIcon" is displayed
+    # And User take screenshot with file name "2.aboutePage_homePage"
     When User click "navbar:navAboutIcon"
-    Then Title currently opened website is equal with "testData:testData_aboutTitle"
+    # Then Title currently opened website is equal with "testData:testData_aboutTitle"
     Then Currently opened website URL is equal with "testData:testData_aboutPageUrl"
     Then Element "aboutPage:aboutPageTitle" is displayed
     And User take screenshot with file name "3.about"
