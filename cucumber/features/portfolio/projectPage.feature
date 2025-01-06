@@ -26,6 +26,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     Then Element "projectPage:projectContentTitleSeven" is equal with data "testData:testData_projectContentTitleSeven"
     # Then Element "projectPage:projectContentSeven" is equal with data "testData:testData_projectContentSeven"
     And User take screenshot with file name "5.projectPageLastPart"
+    And User click "projectPage:projectSeven_button"
 
 @portfolio @projectPage @projectPage_googleSearchEngine_two
 Scenario: Verify user successfully redirects to Project page when clicking Project on navbar on Home page via google search engine - two
@@ -46,6 +47,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     When User swipe up until 3 seconds
     Then Element "projectPage:projectContentTitleSeven" is equal with data "testData:testData_projectContentTitleSeven"
     And User take screenshot with file name "5.projectPageLastPart"
+    And User click "projectPage:projectSeven_button"
 
 @portfolio @projectPage @projectPage_googleSearchEngine_three
 Scenario: Verify user successfully redirects to Project page when clicking Project on navbar on Home page via google search engine - three
@@ -66,6 +68,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     When User swipe up until 3 seconds
     Then Element "projectPage:projectContentTitleSeven" is equal with data "testData:testData_projectContentTitleSeven"
     And User take screenshot with file name "5.projectPageLastPart"
+    And User click "projectPage:projectSeven_button"
 
 @portfolio @projectPage @projectPage_googleSearchEngine_four
 Scenario: Verify user successfully redirects to Project page when clicking Project on navbar on Home page via google search engine - four
@@ -86,6 +89,7 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     When User swipe up until 3 seconds
     Then Element "projectPage:projectContentTitleSeven" is equal with data "testData:testData_projectContentTitleSeven"
     And User take screenshot with file name "5.projectPageLastPart"
+    And User click "projectPage:projectSeven_button"
 
 @portfolio @projectPage @projectPage_googleSearchEngine_five
 Scenario: Verify user successfully redirects to Project page when clicking Project on navbar on Home page via google search engine - five
@@ -106,3 +110,4 @@ Scenario: Verify user successfully redirects to Project page when clicking Proje
     When User swipe up until 3 seconds
     Then Element "projectPage:projectContentTitleSeven" is equal with data "testData:testData_projectContentTitleSeven"
     And User take screenshot with file name "5.projectPageLastPart"
+    And User click "projectPage:projectSeven_button"

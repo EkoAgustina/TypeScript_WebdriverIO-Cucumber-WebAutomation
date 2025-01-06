@@ -66,7 +66,7 @@ try {
  */
 async function setBrowserSize() {
   try {
-    await browser.fullscreenWindow();
+    await browser.maximizeWindow();
   } catch (err: any) {
     log("ERROR", err.message)
     throw err
