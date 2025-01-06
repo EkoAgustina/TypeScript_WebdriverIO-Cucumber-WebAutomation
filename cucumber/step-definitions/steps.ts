@@ -197,8 +197,30 @@ Given(/^Users access web portfolios on Google search engine$/, async () => {
                     await takeScreenshot("Google_search_engine")
                     await actionClick("google:google_url_portfolio");
                 }
+                // cek index 13
                 else if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                    throw new Error("https://ekoagustina.my.id not found on google search engine")
+                    await actionClick("google:google_search_index_thirteen");
+                    await setBrowserSize()
+
+                    if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+                        await takeScreenshot("Google_search_engine")
+                        await actionClick("google:google_url_portfolio");
+                    }
+
+                    // cek index 14
+                    else if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+                        await actionClick("google:google_search_index_fourteen");
+                        await setBrowserSize()
+
+                        if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+                            await takeScreenshot("Google_search_engine")
+                            await actionClick("google:google_url_portfolio");
+                        }
+
+                        else if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
+                            throw new Error("https://ekoagustina.my.id not found on google search engine")
+                        }
+                    }
                 }
             }
             else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
