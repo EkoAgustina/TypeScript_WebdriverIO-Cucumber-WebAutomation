@@ -2,7 +2,7 @@ import { Given, When, Then } from '@wdio/cucumber-framework';
 import { baseOpenBrowser, takeScreenshot, pageLoad, sleep, actionEnter, setBrowserSize, log, findElement } from '../../helpers/baseScreen.ts';
 import { actionClick } from '../../helpers/baseClick.ts';
 import { elementDisplayed, equalData, titleEqual, urlEqual } from '../../helpers/baseExpect.ts';
-import {  swipeUpwithTime } from "../../helpers/baseSwipe.ts";
+import { swipeUpwithTime } from "../../helpers/baseSwipe.ts";
 import { actionFill } from '../../helpers/baseFill.ts';
 import { parseTestData } from '../../mappings/mapper.ts';
 
@@ -148,7 +148,7 @@ Then(/^User take screenshot with file name "(.*)"$/, async (name) => {
  */
 Then(/^User fill "(.*)" with data "(.*)"$/, async (locator, test_data) => {
     try {
-        await actionFill(locator,test_data);
+        await actionFill(locator, test_data);
     } catch (err: any) {
         log("ERROR", err.message)
         throw err
@@ -173,7 +173,7 @@ Given(/^Users access web portfolios on Google search engine$/, async () => {
 
     try {
         // Open browser
-        await baseOpenBrowser(parseTestData("testData:google_url_search_engine_ten"));
+        await baseOpenBrowser(parseTestData("testData:google_url_search_engine_twelve"));
         await pageLoad(5);
 
         // 
@@ -182,95 +182,33 @@ Given(/^Users access web portfolios on Google search engine$/, async () => {
         // sleep(1);
 
         await setBrowserSize()
-
-        if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-            // Cek index 11
-            await actionClick("google:google_search_index_eleven");
+        if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())){
+            // Cek 13
+            await actionClick("google:google_search_index_thirteen");
             await setBrowserSize()
 
-            if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                // Cek index 12
-                await actionClick("google:google_search_index_twelve");
+            if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())){
+                // cek 14
+                await actionClick("google:google_search_index_thirteen");
                 await setBrowserSize()
 
                 if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                    await takeScreenshot("Google_search_engine")
-                    await actionClick("google:google_url_portfolio");
-                }
-                // cek index 13
-                else if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
                     await actionClick("google:google_search_index_thirteen");
                     await setBrowserSize()
-
-                    if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                        await takeScreenshot("Google_search_engine")
-                        await actionClick("google:google_url_portfolio");
-                    }
-
-                    // cek index 14
-                    else if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                        await actionClick("google:google_search_index_fourteen");
-                        await setBrowserSize()
-
-                        if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                            await takeScreenshot("Google_search_engine")
-                            await actionClick("google:google_url_portfolio");
-                        }
-
-                        else if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-                            throw new Error("https://ekoagustina.my.id not found on google search engine")
-                        }
-                    }
+                }
+                else if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())){
+                    throw new Error ("https://ekoagustina.my.id not found on google search engine")
                 }
             }
             else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
                 await takeScreenshot("Google_search_engine")
                 await actionClick("google:google_url_portfolio");
             }
-
         }
         else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
             await takeScreenshot("Google_search_engine")
             await actionClick("google:google_url_portfolio");
         }
-
-        // if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())){
-        //     // Cek index 10
-        //     await actionClick("google:google_search_index_ten");
-        //     await setBrowserSize()
-
-        //     if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-        //         // Cek index 11
-        //         await actionClick("google:google_search_index_eleven");
-        //         await setBrowserSize()
-
-        //         if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-        //             // Cek index 12
-        //             await actionClick("google:google_search_index_twelve");
-        //             await setBrowserSize()
-
-        //             if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-        //                 await takeScreenshot("Google_search_engine")
-        //                 await actionClick("google:google_url_portfolio");
-        //             }
-        //             else if (!await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-        //                 throw new Error("https://ekoagustina.my.id not found on google search engine")
-        //             }
-        //         }
-        //         else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-        //             await takeScreenshot("Google_search_engine")
-        //             await actionClick("google:google_url_portfolio");
-        //         }
-
-        //     }
-        //     else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-        //         await takeScreenshot("Google_search_engine")
-        //         await actionClick("google:google_url_portfolio");
-        //     }
-        // }
-        // else if (await ((await findElement("google:google_url_portfolio")).isDisplayed())) {
-        //     await actionClick("google:google_url_portfolio");
-        // }
 
         await setBrowserSize()
         await pageLoad(5);
