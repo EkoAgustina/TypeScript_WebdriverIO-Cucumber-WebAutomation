@@ -17,6 +17,7 @@ if (globalVariables.os === 'linux') {
                             '--disable-gpu',
                             '--disable-gpu-compositing', 
                             '--disable-extensions',
+                            '--disable-dev-shm-usage',
                             '--disable-cache', 
                             `--user-agent=${globalVariables.getRandomUserAgent()}`]
             },
