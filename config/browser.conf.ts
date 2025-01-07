@@ -19,7 +19,7 @@ if (globalVariables.os === 'linux') {
                             '--disable-dev-shm-usage',
                             '--disable-extensions',
                             '--disable-cache', 
-                            `--user-agent=${env.CUSTOM_USER_AGENT_CHROME_HEADLESS}`]
+                            `--user-agent=${globalVariables.getRandomUserAgent()}`]
             },
             acceptInsecureCerts: true,
             // webSocketUrl: true
@@ -42,7 +42,7 @@ if (globalVariables.os === 'linux') {
                             '--disable-dev-shm-usage',
                             '--disable-extensions',
                             '--disable-cache', 
-                            `--user-agent=${env.CUSTOM_USER_AGENT_CHROME_HEADLESS}`]
+                            `--user-agent=${globalVariables.getRandomUserAgent()}`]
                     },
                     acceptInsecureCerts: true,
                     // webSocketUrl: true
@@ -54,7 +54,7 @@ if (globalVariables.os === 'linux') {
                 {
                     browserName: 'chrome',
                     'goog:chromeOptions': {
-                        args: ['--disable-cache',]
+                        args: ['--disable-cache','--incognito']
                     },
                     maxInstances: 5,
                     acceptInsecureCerts: true,
@@ -78,7 +78,7 @@ if (globalVariables.os === 'linux') {
                             '--disable-dev-shm-usage',
                             '--disable-extensions',
                             '--disable-cache', 
-                            `--user-agent=${env.CUSTOM_USER_AGENT_CHROME_HEADLESS}`]
+                            `--user-agent=${globalVariables.getRandomUserAgent()}`]
                     },
                     acceptInsecureCerts: true,
                     // webSocketUrl: true

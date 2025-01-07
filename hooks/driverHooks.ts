@@ -88,6 +88,12 @@ async function hooksAfterScenario(world: any, result: any): Promise<void> {
   properties.set('Host', allureHostUrl() || 'Unknown');
   properties.save(propertiesPath);
 
+  const userAgent = await browser.execute(() => {
+    return navigator.userAgent;
+});
+
+console.log("user agent: " + userAgent)
+
   if (result.error) {
     await takeScreenshot(`failed_${world.pickle.name}`)
   }

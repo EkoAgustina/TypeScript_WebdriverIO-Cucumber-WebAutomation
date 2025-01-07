@@ -51,13 +51,20 @@ export default class globalVariables {
     * User agents for random selection.
     * @type {string[]}
     */
+  // static userAgents: string[] = [
+  //   process.env.CUSTOM_USER_AGENT_ONE || 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
+  //   process.env.CUSTOM_USER_AGENT_TWO || 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
+  //   process.env.CUSTOM_USER_AGENT_THREE || 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
+  //   process.env.CUSTOM_USER_AGENT_FOUR || 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
+  //   process.env.CUSTOM_USER_AGENT_FIVE || 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36'
+  // ].filter(Boolean) as string[];
   static userAgents: string[] = [
-    process.env.CUSTOM_USER_AGENT_ONE || 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
-    process.env.CUSTOM_USER_AGENT_TWO || 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
-    process.env.CUSTOM_USER_AGENT_THREE || 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
-    process.env.CUSTOM_USER_AGENT_FOUR || 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
-    process.env.CUSTOM_USER_AGENT_FIVE || 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36'
-  ].filter(Boolean) as string[];
+    `${process.env.CUSTOM_USER_AGENT_ONE}`,
+    `${process.env.CUSTOM_USER_AGENT_TWO}`,
+    `${process.env.CUSTOM_USER_AGENT_THREE}`,
+    `${process.env.CUSTOM_USER_AGENT_FOUR}`,
+    `${process.env.CUSTOM_USER_AGENT_FIVE}`
+  ]
 
   /**
    * Get a random user agent.
