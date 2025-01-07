@@ -62,8 +62,6 @@ export default class globalVariables {
     `${process.env.CUSTOM_USER_AGENT_ONE}`,
     `${process.env.CUSTOM_USER_AGENT_TWO}`,
     `${process.env.CUSTOM_USER_AGENT_THREE}`,
-    `${process.env.CUSTOM_USER_AGENT_FOUR}`,
-    `${process.env.CUSTOM_USER_AGENT_FIVE}`
   ]
 
   /**
