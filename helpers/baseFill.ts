@@ -9,7 +9,11 @@ import { parseTestData } from "../mappings/mapper.ts"
  */
 async function actionFill(locator: string, test_data: string): Promise<void> {
     try {
-        await (await findElement(locator)).setValue(parseTestData(test_data));
+        // await (await findElement(locator)).setValue(parseTestData(test_data));
+        for (const char of parseTestData(test_data)) {
+            await (await findElement(locator)).addValue(char);
+            //await browser.pause(1); // Pause 100ms antara tiap karakter untuk simulasi pengetikan
+          }
     } catch (err:any) {
         log("ERROR", err.message)
         throw err

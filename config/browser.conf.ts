@@ -14,6 +14,8 @@ if (globalVariables.os === 'linux') {
             'goog:chromeOptions': {
                         args: ['--headless', 
                             '--no-sandbox', 
+                            '--incognito', 
+                            '--disable-blink-features=AutomationControlled',
                             '--disable-gpu',
                             '--disable-gpu-compositing', 
                             '--disable-extensions',
@@ -36,7 +38,9 @@ if (globalVariables.os === 'linux') {
                     browserName: 'chrome',
                     'goog:chromeOptions': {
                         args: ['--headless', 
-                            '--no-sandbox', 
+                            '--no-sandbox',
+                            '--incognito', 
+                            '--disable-blink-features=AutomationControlled',
                             '--disable-gpu',
                             '--disable-gpu-compositing', 
                             '--disable-dev-shm-usage',
@@ -54,7 +58,7 @@ if (globalVariables.os === 'linux') {
                 {
                     browserName: 'chrome',
                     'goog:chromeOptions': {
-                        args: ['--disable-cache','--incognito']
+                        args: ['--disable-cache','--disable-blink-features=AutomationControlled','--incognito']
                     },
                     maxInstances: 5,
                     acceptInsecureCerts: true,
@@ -73,12 +77,14 @@ if (globalVariables.os === 'linux') {
                     'goog:chromeOptions': {
                         args: ['--headless', 
                             '--no-sandbox', 
+                            '--incognito', 
+                            '--disable-blink-features=AutomationControlled',
                             '--disable-gpu',
                             '--disable-gpu-compositing', 
                             '--disable-dev-shm-usage',
                             '--disable-extensions',
                             '--disable-cache', 
-                            `--user-agent=${globalVariables.getRandomUserAgent()}`]
+                            `--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36`]
                     },
                     acceptInsecureCerts: true,
                     // webSocketUrl: true
@@ -93,17 +99,29 @@ if (globalVariables.os === 'linux') {
 }
 
 config.before = async () => {
-    await browser.deleteCookies();
-    await browser.execute(() => {
-        if ('caches' in window) {
-          caches.keys().then(keys => {
-            keys.forEach(key => {
-              caches.delete(key);
-            });
-          });
-        }
-      });
+    // await browser.deleteCookies();
+    // await browser.execute(() => {
+    //     if ('caches' in window) {
+    //       caches.keys().then(keys => {
+    //         keys.forEach(key => {
+    //           caches.delete(key);
+    //         });
+    //       });
+    //     }
+    //   });
 
+    // customGeolocation(globalVariables.setLatitude, globalVariables.setLongitude)
+    await browser.deleteCookies();
+        await browser.execute(() => {
+            if (window.caches) {
+                caches.keys().then(function(names) {
+                    names.forEach(function(name) {
+                        caches.delete(name);
+                    });
+                });
+            }
+        });
+    
     customGeolocation(globalVariables.setLatitude, globalVariables.setLongitude)
 
 };
